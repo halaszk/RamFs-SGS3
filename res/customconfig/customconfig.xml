@@ -237,6 +237,12 @@ name="CPU Undervolting">
              <spinnerItem name="Blinking" value="0"/> 
              <spinnerItem name="Fading" value="1"/> 
       </spinner>-->
+	 <spinner description="Change USB connection mode. Either leave it as default or force it to mass storage mode (you will see your sdcards as disks) or mtp"
+	name="USB Mass Storage Mode" action="usb-mode">
+	<spinnerItem name="Default" value="default"/>
+	<spinnerItem name="Force Mass Storage Mode" value="mass_storage-adb"/>
+	<spinnerItem name="Force MTP Mode" value="mtp-adb"/>
+	</spinner>
       <seekBar description="AC,CDP,Dock charge currents (default 1000)" 
 		name="AC Charge" action="chargecurrent_ac" unit="mA" min="500" reversed="false" step="100" max="1200"/>
       <seekBar description="USB charge current (default 475)" 
@@ -248,5 +254,16 @@ name="CPU Undervolting">
       <checkbox description="If checked, installs root on the next reboot." name="Auto-Install Root" action="generic /tmp/install_root" label="Auto-Install Root"/>
     </settingsPane>
   </settingsTab>
+<settingsTab name="BUG-REPORT">
 
+<settingsPane description="Debug to SD-Card (/sdcard) ..."
+name="Bug-Report">
+
+<button description="Bug-Report for Kernel" name="Kernel-Bug" action="push-actions/debug_to_sd 1" label="KERNEL-BUG"/>
+
+<button description="Bug-Report for Apps" name="App-Bug" action="push-actions/debug_to_sd 2" label="APP-BUG"/>
+
+</settingsPane>
+
+</settingsTab>
 </settingsRoot>
