@@ -1,0 +1,26 @@
+#!/sbin/busybox sh
+export PATH="/res/customconfig/actions/push-actions:${PATH}";
+
+(
+	PROFILE=`cat /data/.siyah/.active.profile`;
+	. /data/.siyah/$PROFILE.profile;
+
+	# load BLN config state.
+	/res/customconfig/actions/bln_switch bln_switch $bln_switch
+
+	# waiting for screen-off, then ...
+	STATE=$(cat /sys/power/wait_for_fb_sleep);
+
+	# case if GM BLN active in kernel
+	if [ -e /sys/class/misc/notification/led ]; then
+		echo "1" > /sys/class/misc/notification/led;
+	fi;
+
+	# case if Myfluxi BLN active in kernel
+	if [ -e /sys/class/misc/backlightnotification/notification_led ]; then
+		echo "1" > /sys/class/misc/backlightnotification/notification_led;
+	fi;
+)&
+
+echo "Turn off the screen to test BLN.";
+

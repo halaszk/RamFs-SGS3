@@ -1,0 +1,14 @@
+#!/sbin/busybox sh
+
+if [ "a$3" == "a" ];then
+  evalcmd='eval "echo \$GPUTHRESHOLD$2"'
+  eval $evalcmd
+else
+  evalcmd='eval "GPUTHRESHOLD$2=$3"'
+  eval $evalcmd
+  evalcmd='eval "echo \$GPUTHRESHOLD$2"'
+  eval $evalcmd
+ fi
+  if [ -f /sys/devices/system/gpu/thresholds ];then
+	echo "${GPUTHRESHOLDUP} ${GPUTHRESHOLDDOWN}" > /sys/devices/system/gpu/thresholds
+fi

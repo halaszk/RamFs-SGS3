@@ -1,0 +1,24 @@
+#!/sbin/busybox sh
+
+if [ "a$3" == "a" ];then
+  evalcmd='eval "echo \$GPUVOLT$2"'
+  eval $evalcmd
+else
+  evalcmd='eval "GPUVOLT$2=$3"'
+  eval $evalcmd
+  evalcmd='eval "echo \$GPUVOLT$2"'
+  eval $evalcmd
+fi
+  if [ -f /sys/devices/system/gpu/volt_table ];then
+	echo "54 ${GPUVOLT1}" > /sys/devices/system/gpu/volt_table
+	echo "108 ${GPUVOLT2}" > /sys/devices/system/gpu/volt_table
+	echo "160 ${GPUVOLT3}" > /sys/devices/system/gpu/volt_table
+	echo "266 ${GPUVOLT4}" > /sys/devices/system/gpu/volt_table
+	echo "350 ${GPUVOLT5}" > /sys/devices/system/gpu/volt_table
+	echo "440 ${GPUVOLT6}" > /sys/devices/system/gpu/volt_table
+	echo "533 ${GPUVOLT7}" > /sys/devices/system/gpu/volt_table
+	echo "640 ${GPUVOLT8}" > /sys/devices/system/gpu/volt_table
+	echo "733 ${GPUVOLT9}" > /sys/devices/system/gpu/volt_table
+	echo "800 ${GPUVOLT10}" > /sys/devices/system/gpu/volt_table
+  fi
+

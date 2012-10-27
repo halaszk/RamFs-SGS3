@@ -1,0 +1,14 @@
+#!/sbin/busybox sh
+
+if [ "a$3" == "a" ];then
+  evalcmd='eval "echo \$GPUFREQ$2"'
+  eval $evalcmd
+else
+  evalcmd='eval "GPUFREQ$2=$3"'
+  eval $evalcmd
+  evalcmd='eval "echo \$GPUFREQ$2"'
+  eval $evalcmd
+ fi
+    echo $GPUFREQ1 > /sys/devices/system/gpu/min_freq
+    echo $GPUFREQ5 > /sys/devices/system/gpu/max_freq
+
