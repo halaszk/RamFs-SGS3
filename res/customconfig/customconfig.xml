@@ -253,6 +253,13 @@ name="CPU Undervolting">
       <button description="Removes su and Superuser.apk files from the system partition" name="Remove Root" action="remove-root" label="Remove Root"/>
       <checkbox description="If checked, installs root on the next reboot." name="Auto-Install Root" action="generic /tmp/install_root" label="Auto-Install Root"/>
     </settingsPane>
+		<settingsPane description="Here you can Add/Update/Remove AD Blocker! `You need ROOT to do the tweak!` if we update the blocker, you can push the `UPDATE AD NOW`, to get the new one installed!, if you install new ROM, and want to use AD BLOCKER, then push `UPDATE AD NOW` and REBOOT, if you need to REMOVE AD-B use the REMOVE button and REBOOT" name="AD Blocker menu.">
+
+	<button description="ADD/UPDATE AD BLOCKER" name="AD-B UPDATE/ADD" action="push-actions/ad_update" label="UPDATE AD-B NOW"/>
+
+	<button description="REMOVE AD Blocker" name="AD-B REMOVE" action="push-actions/ad_restore" label="REMOVE AD-B NOW"/>
+
+</settingsPane>
   </settingsTab>
 <settingsTab name="BUG-REPORT">
 
