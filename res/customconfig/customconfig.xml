@@ -232,6 +232,12 @@ name="CPU Undervolting">
              <spinnerItem name="vr" value="vr"/> 
              <spinnerItem name="cfq" value="cfq"/> 
       </spinner>
+	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="generic /sys/devices/virtual/bdi/default/read_ahead_kb">
+             <spinnerItem name="512KB" value="512"/> 
+             <spinnerItem name="1024KB" value="1024"/> 
+             <spinnerItem name="2048KB" value="2048"/> 
+             <spinnerItem name="4096KB" value="4096"/> 
+      </spinner>
      <!-- <spinner description="Notification LED Behavior" name="Notification LED Behavior" action="generic /sys/devices/virtual/sec/led/led_fade">
              <spinnerItem name="ROM default" value="-1"/> 
              <spinnerItem name="Blinking" value="0"/> 
