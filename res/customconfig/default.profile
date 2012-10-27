@@ -61,3 +61,4 @@ sched_mc_power_savings=0
 supplicant_scan_interval=360
 gpsregion=No_GPS_Zone_changes
 lcdfreq_enable=0
+usb_mode=default
