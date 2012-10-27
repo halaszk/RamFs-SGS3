@@ -37,7 +37,7 @@
 	<settingsPane description=""
 name="CPU Undervolting">
       <spinner description="Sets the CPU undervolting value which will be applied during boot time only. It will not have any effect until you restart your device. Remember: if you change this value and your device doesn't boot you will have to reset extweaks settings using CWM recovery. This value will be applied to all CPU steps before any script or app execution. If you use any script or voltage control app this setting may be overriden by those." 
-	  name="CPU Undervolting" action="cpu-voltage CPUVOLT1">
+	  name="CPU Undervolting" action="cpu-voltage cpu_undervolting">
              <spinnerItem name="No Undervolting" value="0"/>
              <spinnerItem name=" -25 mV" value="25"/>
              <spinnerItem name=" -50 mV" value="50"/>
@@ -232,7 +232,7 @@ name="CPU Undervolting">
              <spinnerItem name="vr" value="vr"/> 
              <spinnerItem name="cfq" value="cfq"/> 
       </spinner>
-	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="generic /sys/devices/virtual/bdi/default/read_ahead_kb">
+	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="generic /sys/devices/virtual/bdi/179:0/read_ahead_kb">
              <spinnerItem name="512KB" value="512"/> 
              <spinnerItem name="1024KB" value="1024"/> 
              <spinnerItem name="2048KB" value="2048"/> 
