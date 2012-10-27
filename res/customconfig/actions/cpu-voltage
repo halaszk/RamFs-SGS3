@@ -18,7 +18,7 @@ else
 fi
 
   if [ -f /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table ];then
- case "CPUVOLT1" in
+ case "$CPUVOLT1" in
   0)
 	echo "1400 1400 1375 1313 1275 1238 1175 1125 1075 1025 975 963 950 938 925 900 900" > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table
     ;;
