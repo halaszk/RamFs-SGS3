@@ -56,14 +56,14 @@ chmod 644 /*.prop
 chmod -R 755 /lib
 
 # misc mods for i9300
-insmod /lib/modules/m0_mods.ko
+#insmod /lib/modules/m0_mods.ko
 # cpu undervolting interfaces
-insmod /lib/modules/cpu_undervolting.ko
+#insmod /lib/modules/cpu_undervolting.ko
 # mali (gpu) interfaces
-insmod /lib/modules/mali_control.ko
+#insmod /lib/modules/mali_control.ko
 # additional CPU governors
-insmod /lib/modules/cpufreq_hotplug.ko
-insmod /lib/modules/cpufreq_lulzactiveq.ko
+#insmod /lib/modules/cpufreq_hotplug.ko
+#insmod /lib/modules/cpufreq_lulzactiveq.ko
 # additional I/O schedulers
 insmod /lib/modules/sio-iosched.ko
 insmod /lib/modules/vr-iosched.ko
