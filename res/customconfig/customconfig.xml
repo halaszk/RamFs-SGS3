@@ -233,6 +233,7 @@ name="CPU Undervolting">
              <spinnerItem name="deadline" value="deadline"/> 
              <spinnerItem name="vr" value="vr"/> 
              <spinnerItem name="cfq" value="cfq"/> 
+			 <spinnerItem name="bfq" value="bfq"/>
       </spinner>
 	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="generic /sys/devices/virtual/bdi/179:0/read_ahead_kb">
              <spinnerItem name="512KB" value="512"/> 
