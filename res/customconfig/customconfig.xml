@@ -179,7 +179,8 @@ name="CPU Undervolting">
     <settingsPane description="Other screen related settings" name="Other Settings">
        <checkbox description="mDNIe sharpness tweaks from hardcore. Requires reboot to be effective." name="mDNIe Sharpness Tweaks" action="generic /tmp/mdniemod" label="mDNIe Sharpness Tweaks"/>
       <!--<checkbox description="Enable inverting the screen colors by quickly pressing Home button 4 times" name="mDNIe Negative Toggle" action="generic01 /sys/module/gpio_keys/parameters/mdnie_shortcut_enabled" label="mDNIe Negative Toggle"/>-->
-	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling"/>
+	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for PeqasusQ"/>
+	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/ondemand/lcdfreq_enable" label="Dynamic Screen Frequency Scaling For ondemand"/>
        <spinner description="Set CPU freq boost level when you touch the screen. Lower levels will help with the battery with the cost of UI lags" name="Touch Boost Level" action="generic /sys/class/misc/m0mods/touch_boost_level">
              <spinnerItem name="1200MHz" value="6"/>
              <spinnerItem name="1000MHz" value="8"/>
