@@ -207,6 +207,8 @@ name="CPU Undervolting">
 	<spinnerItem name="Set WIFI SCAN 240Sec" value="240"/>
 	<spinnerItem name="Set WIFI SCAN 360Sec" value="360"/>
 	</spinner>
+		<checkbox description="Here you can Allow WIFI to use full LOW PWR, by default we use MAX PWR! On LOW PMR get slow speed on wifi transfers, not checked=LOW PWR, checked=HIGH PWR"
+		name="WIFI LOW/HIGH POWER SWITCH" action="generic01 /sys/module/dhd/parameters/wifi_pm" label="WIFI HIGH PWR"/>
 	<spinner description="GPS Time Zone for faster LOCK! Use your region to fix GPS location!" name="GPS Region" action="gpsregion">
 	<spinnerItem name="No GPS Zone changes (default)" value="No_GPS_Zone_changes"/>
 	<spinnerItem name="Set Asia" value="Asia"/>

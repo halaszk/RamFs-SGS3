@@ -63,3 +63,4 @@ gpsregion=No_GPS_Zone_changes
 lcdfreq_enable=0
 usb_mode=default
 read_ahead_kb=1024
+wifi_pm=1
