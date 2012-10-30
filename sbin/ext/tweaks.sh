@@ -23,7 +23,7 @@ cat /proc/version | grep infra && (kmemhelper -t string -n linux_proc_banner -o 
 #echo 2 > /sys/devices/system/cpu/sched_mc_power_savings
 echo "54 108 160 266 350 440 533 640 733 800" > /sys/devices/system/gpu/freq_table
 #echo "675 700 750 825 875 975 1075 1125 1175 1200" > /sys/devices/system/gpu/volt_table
-#echo "1300 1300 1275 1213 1175 1138 1075 1025 975 925 875 863 850 838 825 800 800" > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table
+echo "1300 1300 1275 1213 1175 1138 1075 1025 975 925 875 863 850 838 825 800 800" > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table
 # enable KSM.
 echo "1" > /sys/kernel/mm/ksm/run;
 # pegasusq tweaks
