@@ -1,0 +1,39 @@
+#!/sbin/busybox sh
+
+if [ "a$2" == "a" ];then
+exit
+fi
+
+filename=$(basename $2)
+
+if [ "a$3" == "a" ];then
+  evalcmd='eval "echo \$$filename"'
+  eval $evalcmd
+  exit
+else
+  evalcmd='eval "$filename=$3"'
+  eval $evalcmd
+  evalcmd='eval "echo \$$filename"'
+  eval $evalcmd
+fi
+
+  if [ -f /sys/devices/system/cpu/cpu0/cpufreq/int_mV_table ];then
+ case "$cpu_bus_undervolting" in
+  0)
+        cat /sys/devices/system/cpu/cpu0/cpufreq/int_mV_table
+    ;;
+  25)
+        echo "975 975 925 925 875 875 875" > /sys/devices/system/cpu/cpu0/cpufreq/int_mV_table
+    ;;
+  50)
+        echo "950 950 900 900 850 850 850" > /sys/devices/system/cpu/cpu0/cpufreq/int_mV_table
+    ;;
+  75)
+        echo "925 925 875 875 825 825 825" > /sys/devices/system/cpu/cpu0/cpufreq/int_mV_table
+    ;;
+  100)
+        echo "900 900 850 850 800 800 800" > /sys/devices/system/cpu/cpu0/cpufreq/int_mV_table
+    ;;
+esac;
+fi
+
