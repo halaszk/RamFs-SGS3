@@ -49,6 +49,54 @@ echo "250" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_1;
 echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_0;
 echo "400" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_1;
 echo "400" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_4_0;
+
+ # file system tweaks
+  sysctl -w fs.inotify.max_queued_events=32000
+  sysctl -w fs.file-max=524288
+  sysctl -w fs.inotify.max_user_instances=256
+  sysctl -w fs.inotify.max_user_watches=10240
+  sysctl -w fs.lease-break-time=10
+
+  # kernel setting tweaks
+  sysctl -w kernel.msgmax=65536
+  sysctl -w kernel.msgmni=2048
+  sysctl -w kernel.panic=10
+  sysctl -w kernel.random.read_wakeup_threshold=128
+  sysctl -w kernel.random.write_wakeup_threshold=256
+  sysctl -w kernel.sched_latency_ns=18000000
+  sysctl -w kernel.sched_wakeup_granularity_ns=3000000
+  sysctl -w kernel.sched_min_granularity_ns=1500000
+  sysctl -w kernel.sem='500 512000 64 2048'
+  sysctl -w kernel.shmmax=268435456
+  sysctl -w kernel.threads-max=524288
+
+  # net tweaks
+  sysctl -w net.core.rmem_max=524288
+  sysctl -w net.core.wmem_max=524288
+  sysctl -w net.ipv4.tcp_rmem='6144 87380 524288'
+  sysctl -w net.ipv4.tcp_tw_recycle=1
+  sysctl -w net.ipv4.tcp_wmem='6144 87380 524288'
+
+  # vm tweaks
+  sysctl -w vm.dirty_background_ratio=70
+  sysctl -w vm.dirty_expire_centisecs=250
+  sysctl -w vm.dirty_ratio=90
+  sysctl -w vm.dirty_writeback_centisecs=500
+  sysctl -w vm.min_free_kbytes=4096
+  sysctl -w vm.swappiness=60
+  sysctl -w vm.vfs_cache_pressure=10
+  sysctl -w vm.drop_caches=3
+
+ # vm tweaks
+  echo "12288" > /proc/sys/vm/min_free_kbytes
+  echo "1500" > /proc/sys/vm/dirty_writeback_centisecs
+  echo "200" > /proc/sys/vm/dirty_expire_centisecs
+  echo "0" > /proc/sys/vm/swappiness
+  
+    # TCP tweaks
+  echo "2" > /proc/sys/net/ipv4/tcp_syn_retries
+  echo "2" > /proc/sys/net/ipv4/tcp_synack_retries
+  echo "10" > /proc/sys/net/ipv4/tcp_fin_timeout
 # process priority modifications
 (
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20;do
