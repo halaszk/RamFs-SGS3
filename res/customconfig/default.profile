@@ -22,6 +22,7 @@ scaling_governor=pegasusq
 install_root=on
 user_gamma_adjust=0
 cpu_undervolting=0
+cpu_bus_undervolting=0
 smooth_level0=10
 scaling_max_freq=1400000
 scaling_min_freq=200000
