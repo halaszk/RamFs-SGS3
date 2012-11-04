@@ -52,6 +52,14 @@ then
   fi
 fi;
 
+if [ "$install_myscript" == "on" ];
+then
+  if [ ! -f /system/etc/init.d/S96halaszk ];
+  then
+ cp /res/S96halaszk /system/etc/init.d/S96halaszk 
+  fi
+fi;
+
 echo "Checking if STweaks is installed"
 if [ ! -f /system/.siyah/stweaks-installed ];
 then

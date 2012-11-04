@@ -20,6 +20,7 @@ logger=on
 scheduler=cfq
 scaling_governor=pegasusq
 install_root=on
+install_myscript=on
 user_gamma_adjust=0
 cpu_undervolting=0
 cpu_bus_undervolting=0
