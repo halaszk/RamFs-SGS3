@@ -56,7 +56,7 @@ chmod 644 /*.prop
 chmod -R 755 /lib
 
 # misc mods for i9300
-insmod /lib/modules/m0_mods.ko
+#insmod /lib/modules/m0_mods.ko
 # cpu undervolting interfaces
 #insmod /lib/modules/cpu_undervolting.ko
 # mali (gpu) interfaces
