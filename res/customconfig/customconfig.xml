@@ -268,10 +268,13 @@ name="CPU Undervolting">
 	</spinner>-->
 	<checkbox description="If checked, installs optimize script on the next restart." name="Auto-Install halaszk script" action="generic /tmp/install_myscript" label="Auto-Install halaszk script"/>
 
-      <seekBar description="AC,CDP,Dock charge currents (default 1000)" 
-		name="AC Charge" action="chargecurrent chargecurrent_ac" unit="mA" min="500" reversed="false" step="50" max="1200"/>
-      <seekBar description="USB charge current (default 475)" 
-		name="USB Charge" action="chargecurrent chargecurrent_usb" unit="mA" min="450" reversed="false" step="25" max="900"/>
+ 		<spinner description="Charge current setting" name="Charge Current" action="chargecurrent">
+			<spinnerItem name="AC/MISC:550mA, USB:450mA" value="0"/> 
+			<spinnerItem name="AC:650mA, Misc,USB:450mA (Stock)" value="1"/> 
+			<spinnerItem name="AC/MISC:700mA, USB:500mA" value="2"/> 
+			<spinnerItem name="AC/Misc:750mA, USB:650mA(For normal charger and USB2.0 max)" value="3"/> 
+			<spinnerItem name="AC/Misc:1200mA, USB:900mA(risky, may overheat if phone used and only for fast charger and USB3.0)" value="4"/> 
+		</spinner>
       <!--<checkbox description="If checked, BetterBatteryStatus will report discrete (non-overlapping) wakelock statistics." name="Discrete Wakelock Stats" action="generic01 /sys/module/wakelock/parameters/default_stats" label="Discrete Wakelock Stats"/>-->
     </settingsPane>
     <settingsPane description="Removing/Reinstalling root to support some apps which requires you not to have a rooted phone." name="Remove/Reinstall Root">
