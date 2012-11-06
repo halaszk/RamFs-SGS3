@@ -192,7 +192,7 @@ name="CPU Undervolting">
       <!--<checkbox description="Enable inverting the screen colors by quickly pressing Home button 4 times" name="mDNIe Negative Toggle" action="generic01 /sys/module/gpio_keys/parameters/mdnie_shortcut_enabled" label="mDNIe Negative Toggle"/>-->
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for PeqasusQ"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/ondemand/lcdfreq_enable" label="Dynamic Screen Frequency Scaling For ondemand"/>
-       <spinner description="Set CPU freq boost level when you touch the screen. Lower levels will help with the battery with the cost of UI lags" name="Touch Boost Level" action="generic /sys/class/misc/m0mods/touch_boost_level">
+<!--       <spinner description="Set CPU freq boost level when you touch the screen. Lower levels will help with the battery with the cost of UI lags" name="Touch Boost Level" action="generic /sys/class/misc/m0mods/touch_boost_level">
              <spinnerItem name="1200MHz" value="6"/>
              <spinnerItem name="1000MHz" value="8"/>
              <spinnerItem name="900MHz" value="9"/>
@@ -201,7 +201,7 @@ name="CPU Undervolting">
              <spinnerItem name="600MHz" value="12"/>
              <spinnerItem name="500MHz" value="13"/>
              <spinnerItem name="200MHz (disabled)" value="16"/>
-       </spinner>
+       </spinner>-->
     </settingsPane>
   </settingsTab>
   <settingsTab name="Misc">
@@ -249,7 +249,7 @@ name="CPU Undervolting">
              <spinnerItem name="cfq" value="cfq"/> 
 			 <spinnerItem name="bfq" value="bfq"/>
       </spinner>
-	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="generic /sys/devices/virtual/bdi/179:0/read_ahead_kb">
+	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="read_ahead_kb">
              <spinnerItem name="512KB" value="512"/> 
              <spinnerItem name="1024KB" value="1024"/> 
              <spinnerItem name="2048KB" value="2048"/> 

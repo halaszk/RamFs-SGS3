@@ -1,0 +1,17 @@
+#!/sbin/busybox sh
+
+if [ "a$2" == "a" ]; then
+echo "$read_ahead_kb";
+else
+read_ahead_kb=$2;
+echo "$read_ahead_kb";
+fi;
+
+if [ -e /sys/devices/virtual/bdi/default/read_ahead_kb ]; then
+echo "$read_ahead_kb" > /sys/devices/virtual/bdi/default/read_ahead_kb;
+fi;
+
+SDCARDREADAHEAD=`ls -d /sys/devices/virtual/bdi/179*`;
+for i in $SDCARDREADAHEAD; do
+echo "$read_ahead_kb" > $i/read_ahead_kb;
+done;
