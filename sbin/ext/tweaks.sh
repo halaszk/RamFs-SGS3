@@ -25,7 +25,7 @@ echo "54 108 160 266 350 440 533 640 733 800" > /sys/devices/system/gpu/freq_tab
 #echo "675 700 750 825 875 975 1075 1125 1175 1200" > /sys/devices/system/gpu/volt_table
 #echo "1300 1300 1275 1213 1175 1138 1075 1025 975 925 875 863 850 838 825 800 800" > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table
 # enable KSM.
-echo "1" > /sys/kernel/mm/ksm/run;
+#echo "1" > /sys/kernel/mm/ksm/run;
 # pegasusq tweaks
 echo "80000" > /sys/devices/system/cpu/cpufreq/pegasusq/sampling_rate;
 echo "80" > /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold;
