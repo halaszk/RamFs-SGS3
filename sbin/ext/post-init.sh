@@ -22,7 +22,7 @@ read_defaults
 read_config
 
 #cpu undervolting
-#echo "${cpu_undervolting}" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+echo "${cpu_undervolting}" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
 
 #mdnie sharpness tweak
 if [ "$mdniemod" == "on" ];then
