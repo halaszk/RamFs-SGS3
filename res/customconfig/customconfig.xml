@@ -275,8 +275,6 @@ name="CPU Undervolting">
 	<spinnerItem name="Force Mass Storage Mode" value="mass_storage-adb"/>
 	<spinnerItem name="Force MTP Mode" value="mtp-adb"/>
 	</spinner>
-<!--	<checkbox description="If checked, installs optimize script on the next restart." name="Auto-Install halaszk script" action="generic /tmp/install_myscript" label="Auto-Install halaszk script"/>-->
-
  		<spinner description="Charge current setting" name="Charge Current" action="chargecurrent">
 			<spinnerItem name="AC/MISC:550mA, USB:450mA" value="0"/> 
 			<spinnerItem name="AC:650mA, Misc,USB:450mA (Stock)" value="1"/> 
