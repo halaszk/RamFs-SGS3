@@ -269,12 +269,12 @@ name="CPU Undervolting">
              <spinnerItem name="Blinking" value="0"/> 
              <spinnerItem name="Fading" value="1"/> 
       </spinner>-->
-<!--	 <spinner description="Change USB connection mode. Either leave it as default or force it to mass storage mode (you will see your sdcards as disks) or mtp"
+	 <spinner description="Change USB connection mode. Either leave it as default or force it to mass storage mode (you will see your sdcards as disks) or mtp"
 	name="USB Mass Storage Mode" action="usb-mode">
 	<spinnerItem name="Default" value="default"/>
 	<spinnerItem name="Force Mass Storage Mode" value="mass_storage-adb"/>
 	<spinnerItem name="Force MTP Mode" value="mtp-adb"/>
-	</spinner>-->
+	</spinner>
 <!--	<checkbox description="If checked, installs optimize script on the next restart." name="Auto-Install halaszk script" action="generic /tmp/install_myscript" label="Auto-Install halaszk script"/>-->
 
  		<spinner description="Charge current setting" name="Charge Current" action="chargecurrent">
