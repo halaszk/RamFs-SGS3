@@ -24,7 +24,7 @@ cat /proc/version | grep infra && (kmemhelper -t string -n linux_proc_banner -o 
 # "...by keeping the group of tasks on a single cpu package...
 # "...facilitating cache sharing and reduced off-chip traffic"
 echo 2 > /sys/devices/system/cpu/sched_mc_power_savings
-
+echo "54 108 160 266 350 440 533 640 733 800" > /sys/devices/system/gpu/freq_table
 # pegasusq tweaks
 echo 500000 > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_1_1
 echo 400000 > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_0

@@ -302,9 +302,6 @@ name="CPU Undervolting">
       <button description="Reboot into 1stROM" name="Reboot into 1stROM" action="reboot-into 1" label="Reboot into 1stROM"/>
       <button description="Reboot into 2ndROM" name="Reboot into 2ndROM" action="reboot-into 2" label="Reboot into 2ndROM"/>
     </settingsPane>
-    <settingsPane description="Hijack recovery if you like to use 2ndROM utils as recovery. Warning: No confirmation will be asked for buttons." name="Hijack Recovery">
-      <button description="This button will simply flash the kernel to the recovery partition and you will have 2ndROM Utils as your 3-button combo recovery" name="Hijack Recovery" action="hijack-recovery" label="Hijack Recovery"/>
-    </settingsPane>
   </settingsTab>
 <settingsTab name="BUG-REPORT">
 
