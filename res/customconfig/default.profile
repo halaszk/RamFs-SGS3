@@ -69,3 +69,5 @@ min_gamma=1
 max_gamma=24
 run=0
 pwm_val=75
+busfreq_up_threshold=23
+
