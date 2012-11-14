@@ -48,7 +48,7 @@ then
     rm -rf /data/dalvik-cache/*chainfire?supersu*.apk*
 	
 	# extract super user app
-	cp -a /res/misc/payload/SuperSU.apk /system/app/SuperSU.apk;
+	xzcat /res/misc/payload/SuperSU.apk.xz > /system/app/SuperSU.apk;
 	chown 0.0 /system/app/SuperSU.apk;
 	chmod 644 /system/app/SuperSU.apk;
 	
