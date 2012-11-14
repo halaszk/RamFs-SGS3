@@ -190,6 +190,7 @@ name="CPU Undervolting">
   <settingsTab name="Screen">
     <settingsPane description="Other screen related settings" name="Other Settings">
        <checkbox description="mDNIe sharpness tweaks from hardcore. Requires reboot to be effective." name="mDNIe Sharpness Tweaks" action="generic /tmp/mdniemod" label="mDNIe Sharpness Tweaks"/>
+	   <checkbox description="GPU UI render and Powersave tweaks enable or disable. This function configure android OS GPU UI debug functions and PM sleep mode" name="GPU and Powersave Tweaks" action="generic /tmp/gpuandpowersavetweaks" label="mDNIe Sharpness Tweaks"/>
       <!--<checkbox description="Enable inverting the screen colors by quickly pressing Home button 4 times" name="mDNIe Negative Toggle" action="generic01 /sys/module/gpio_keys/parameters/mdnie_shortcut_enabled" label="mDNIe Negative Toggle"/>-->
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for PeqasusQ"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/ondemand/lcdfreq_enable" label="Dynamic Screen Frequency Scaling For ondemand"/>

@@ -21,8 +21,28 @@ fi
 read_defaults
 read_config
 
-#cpu undervolting
-echo "${cpu_undervolting}" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+if [ "$gpuandpowersavetweaks" == "on" ];then
+# enable Hardware Rendering
+setprop video.accelerate.hw 1;
+setprop debug.performance.tuning 1;
+setprop debug.sf.hw 1;
+setprop persist.sys.use_dithering 1;
+setprop persist.sys.ui.hw true; # ->reported as problem maker in some roms.
+
+# render UI with GPU
+setprop hwui.render_dirty_regions false;
+setprop windowsmgr.max_events_per_sec 120;
+setprop profiler.force_disable_err_rpt 1;
+setprop profiler.force_disable_ulog 1;
+
+# Proximity tweak
+setprop mot.proximity.delay 15;
+
+# more Tweaks
+setprop dalvik.vm.execution-mode int:jit;
+setprop persist.adb.notify 0;
+setprop pm.sleep_mode 1;
+fi
 
 #mdnie sharpness tweak
 if [ "$mdniemod" == "on" ];then

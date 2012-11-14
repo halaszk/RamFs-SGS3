@@ -46,9 +46,14 @@ then
     rm -f /data/app/*chainfire?supersu*.apk
     rm -rf /data/dalvik-cache/*uper?ser.apk*
     rm -rf /data/dalvik-cache/*chainfire?supersu*.apk*
-    xzcat /res/misc/payload/Superuser.apk.xz > /system/app/Superuser.apk
-    chown 0.0 /system/app/Superuser.apk
-    chmod 644 /system/app/Superuser.apk
+	
+	# extract super user app
+	cp -a /res/misc/payload/SuperSU.apk /system/app/SuperSU.apk;
+	chown 0.0 /system/app/SuperSU.apk;
+	chmod 644 /system/app/SuperSU.apk;
+	
+	pkill -f "com.noshufou.android.su";
+	pkill -f "eu.chinfire.supersu";
   fi
 fi;
 

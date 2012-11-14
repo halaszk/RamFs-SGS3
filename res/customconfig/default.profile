@@ -70,4 +70,4 @@ max_gamma=24
 run=0
 pwm_val=75
 up_threshold=30
-
+gpuandpowersavetweaks=on
