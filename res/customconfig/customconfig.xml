@@ -36,7 +36,7 @@
       <seekBar description="This is for CPU BUS-FREQ UP-FREQ-Scaling, based on CPU load! default=23%" name="busfreq_up_threshold" action="generic /sys/devices/system/cpu/busfreq/up_threshold" unit="%" min="20" reversed="false" step="1" max="90"/>
     </settingsPane>
 	<settingsPane description=""
-name="CPU Undervolting">
+	name="CPU Undervolting">
       <spinner description="Sets the CPU undervolting value which will be applied during boot time only. It will not have any effect until you restart your device. Remember: if you change this value and your device doesn't boot you will have to reset extweaks settings using CWM recovery. This value will be applied to all CPU steps before any script or app execution. If you use any script or voltage control app this setting may be overriden by those." 
 	  name="CPU Undervolting" action="cpu-voltage cpu_undervolting">
              <spinnerItem name="No Undervolting" value="0"/>
@@ -45,8 +45,9 @@ name="CPU Undervolting">
              <spinnerItem name=" -75 mV" value="75"/>
              <spinnerItem name="-100 mV" value="100"/>
       </spinner>
+	  <button description="Use this button to see CPU Voltage that used right now!" name="Check Active CPU Voltage" action="push-actions/check_cpu_voltage" label="Check CPU Voltage"/>
     </settingsPane>
-<settingsPane description=""
+	<settingsPane description=""
 	name="CPU BUS Undervolting">
       <spinner description="Sets the CPU undervolting value which will be applied during boot time only. It will not have any effect until you restart your device. Remember: if you change this value and your device doesn't boot you will have to reset extweaks settings using CWM recovery. This value will be applied to all CPU steps before any script or app execution. If you use any script or voltage control app this setting may be overriden by those." 
 	  name="CPU BUS Undervolting" action="cpu_bus-voltage cpu_bus_undervolting">
@@ -56,6 +57,7 @@ name="CPU Undervolting">
              <spinnerItem name=" -75 mV" value="75"/>
              <spinnerItem name="-100 mV" value="100"/>
       </spinner>
+	  <button description="Use this button to see CPU BusFreq-Voltage that used right now!" name="Check Active CPU BusFreq-Voltage" action="push-actions/check_cpu_bus_voltage" label="Check CPU BusFreq-Voltage"/>
     </settingsPane>
     <settingsPane description=""
 		name="CPU Scaling Settings">
