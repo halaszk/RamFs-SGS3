@@ -71,3 +71,4 @@ run=0
 pwm_val=75
 up_threshold=30
 gpuandpowersavetweaks=on
+printk_mode=1
