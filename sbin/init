@@ -36,6 +36,7 @@ mount -t ext4 /dev/block/mmcblk0p12 /.secondrom
 
 NEXTBOOT=`cat /.secondrom/media/.nextboot`
 rm -f /.secondrom/media/.nextboot
+DEFAULTROM=`cat /.secondrom/media/.defaultrom`
 
 if grep -q bootmode=2 /proc/cmdline ; then
   NEXTBOOT=0
@@ -70,11 +71,22 @@ else
   elif [ "$NEXTBOOT" == "2" ];then
     SECONDROM=1;
   else
-    /sbin/choose_rom $SECONDROM
-    if [ "$?" == "1" ]; then
-      SECONDROM=1
+    if [ "$NOBOOTLOGO" == "1" ];then
+      SECONDROM=$DEFAULTROM
+    elif [ "$DEFAULTROM" == "1" ];then
+      /sbin/choose_rom $SECONDROM
+      if [ "$?" == "1" ]; then
+        SECONDROM=0
+      else
+        SECONDROM=1
+      fi
     else
-      SECONDROM=0
+      /sbin/choose_rom $SECONDROM
+      if [ "$?" == "1" ]; then
+        SECONDROM=1
+      else
+        SECONDROM=0
+      fi
     fi
   fi
 fi
@@ -101,6 +113,7 @@ then
   if [ "$CM10" == 1 ];
   then
     echo 3 > /proc/sys/kernel/rom_feature_set
+    mv -f /lib/modules/dhd_cm.ko /lib/modules/dhd.ko
     mv -f /res/misc/init.cm10/* /
   else
     echo 2 > /proc/sys/kernel/rom_feature_set
@@ -127,14 +140,14 @@ chmod 644 /*.prop
 chmod -R 755 /lib
 
 # misc mods for i9300
-#insmod /lib/modules/m0_mods.ko
+insmod /lib/modules/m0_mods.ko
 # cpu undervolting interfaces
-#insmod /lib/modules/cpu_undervolting.ko
+insmod /lib/modules/cpu_undervolting.ko
 # mali (gpu) interfaces
-#insmod /lib/modules/mali_control.ko
+insmod /lib/modules/mali_control.ko
 # additional CPU governors
-#insmod /lib/modules/cpufreq_hotplug.ko
-#insmod /lib/modules/cpufreq_lulzactiveq.ko
+insmod /lib/modules/cpufreq_hotplug.ko
+insmod /lib/modules/cpufreq_lulzactiveq.ko
 # additional I/O schedulers
 insmod /lib/modules/sio-iosched.ko
 insmod /lib/modules/vr-iosched.ko

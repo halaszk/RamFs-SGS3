@@ -368,7 +368,7 @@ service gpsd /system/bin/gpsd -c /system/etc/gps.xml
 service TvoutService_C /system/bin/bintvoutservice
      class main
      user system
-     group graphics
+     group system
 on property:ro.tvout.enable=false
     stop TvoutService_C
 service cpboot-daemon /sbin/cbd -d
