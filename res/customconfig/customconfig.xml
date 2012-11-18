@@ -306,6 +306,11 @@
       <button description="Reboot into 2ndROM Utils which let you configure, clone or backup the 2ndROM" name="Reboot into 2ndROM Utils" action="reboot-into 0" label="Reboot into 2ndROM Utils"/>
       <button description="Reboot into 1stROM" name="Reboot into 1stROM" action="reboot-into 1" label="Reboot into 1stROM"/>
       <button description="Reboot into 2ndROM" name="Reboot into 2ndROM" action="reboot-into 2" label="Reboot into 2ndROM"/>
+      <checkbox description="Check this if you don't want boot logo to be shown. If this options is checked boot logo will not be shown even if you have 2ndROM installed." name="No boot-logo" action="no-boot-logo" label="No boot-logo"/>
+      <spinner description="Default ROM to boot into. If you don't have 2ndROM installation 1stROM will be booted. If you press the home or volume-down buttons during the boot logo the alternative ROM will be booted, i.e. 1stROM will be booted if the default ROM selection is the 2ndROM." name="Default ROM" action="defaultrom">
+             <spinnerItem name="1stROM" value="0"/>
+             <spinnerItem name="2ndROM" value="1"/>
+      </spinner>
     </settingsPane>
   </settingsTab>
 <settingsTab name="BUG-REPORT">
