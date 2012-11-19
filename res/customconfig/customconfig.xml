@@ -70,6 +70,8 @@
                 name="scaling_max_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq" unit=" kHz" min="800000" reversed="false" step="100000" max="1800000"/>
        <seekBar description="Scaling minimum frequency (Samsung default: 200000)"
                 name="scaling_min_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq" unit=" kHz" min="200000" reversed="false" step="100000" max="500000"/>
+       <seekBar description="Scaling maximum power_save mode Freq (Samsung default: 1000000)"
+                name="cpufreq_max_limit" action="generic /sys/power/cpufreq_max_limit" unit=" kHz" min="600000" reversed="false" step="100000" max="1400000"/>
     </settingsPane>
   </settingsTab>
   <settingsTab name="GPU">
