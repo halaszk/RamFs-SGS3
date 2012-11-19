@@ -73,3 +73,4 @@ up_threshold=30
 gpuandpowersavetweaks=on
 printk_mode=1
 cpufreq_max_limit=800000
+
