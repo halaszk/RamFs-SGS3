@@ -245,6 +245,7 @@
 	<spinnerItem name="Set Africa" value="Africa"/>
 	<spinnerItem name="Restore original ROM gps.conf" value="Original_ROM_GPS_Restored"/>
 	</spinner>
+	<button description="Click to see your current GPS ZONE" name="GPS ZONE" action="push-actions/gpszonecheck" label="GPS ZONE CHECK"/>
       <spinner description="ZRAM (Compressed swap space in RAM) size" name="ZRAM Size" action="zram">
              <spinnerItem name="disabled" value="0"/>
              <spinnerItem name="100MB" value="100"/>

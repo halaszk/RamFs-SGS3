@@ -8,8 +8,8 @@ else
 	echo "$debug_to_sd";
 fi;
 
-DEBUG_FILE="/sdcard/dorimanx_debug";
-DEBUG_FILE_LOGCAT="/sdcard/dorimanx_debug_logcat";
+DEBUG_FILE="/sdcard/halaszk_debug";
+DEBUG_FILE_LOGCAT="/sdcard/halaszk_debug_logcat";
 
 case "${debug_to_sd}" in
 	1)
