@@ -28,8 +28,8 @@
       </spinner>
       <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ)" name="Max CPU Lock" action="generic /sys/devices/system/cpu/cpufreq/pegasusq/max_cpu_lock">
              <spinnerItem name="Quad core mode (unlocked,default)" value="0"/> 
-             <spinnerItem name="Triple core mode" value="3"/> 
-             <spinnerItem name="Dual core mode" value="2"/> 
+<!--             <spinnerItem name="Triple core mode" value="3"/> -->
+             <spinnerItem name="Dual core mode" value="3"/> 
              <spinnerItem name="Single core mode" value="1"/> 
       </spinner>
       <seekBar description="Sets the sched_mc value which changes the cpu scheduler behaviour for multi-cpu systems. 0 is Samsung kernel's default value which turns sched_mc off. Setting it to 1 means that the first core will be tried to be loaded more and setting it to 2 will bias task wake-ups to semi-idle cpu package for power savings. (default: 0)" name="sched_mc" action="generic /sys/devices/system/cpu/sched_mc_power_savings" unit="" min="0" reversed="false" step="1" max="2"/>
