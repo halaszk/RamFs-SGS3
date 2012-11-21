@@ -230,7 +230,7 @@
 	<spinnerItem name="Set WIFI SCAN 240Sec" value="240"/>
 	<spinnerItem name="Set WIFI SCAN 360Sec" value="360"/>
 	</spinner>
-		<checkbox description="Here you can Allow WIFI to use full LOW PWR, by default we use MAX PWR! On LOW PMR get slow speed on wifi transfers, not checked=LOW PWR, checked=HIGH PWR"
+		<checkbox description="Here you can Allow WIFI to use LOW PWR, by default we use MAX PWR! On LOW PMR get slow speed on wifi transfers, not checked=LOW PWR, checked=HIGH PWR"
 		name="WIFI LOW/HIGH POWER SWITCH" action="generic01 /sys/module/dhd/parameters/wifi_pm" label="WIFI HIGH PWR"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default. Lets the hypervisor system share identical memory pages amongst different processes or virtualized guests. This is done by scanning through the memory finding duplicate page." name="KSM_enable" action="generic01 /sys/kernel/mm/ksm/run" label="Kernel SamePage Merging"/>
 		<checkbox description="Sys kernel interface to configure linux printk logging." name="Linux printk logging" action="generic01 /sys/kernel/printk_mode" label="Linux printk logging enable or disable"/>
