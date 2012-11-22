@@ -15,8 +15,8 @@ if [ "$ad_block_update" == "on" ]; then
 	DNS2=`getprop net.rmnet0.dns2`;
 
 	echo "nameserver 8.8.8.8" > /system/etc/resolv.conf;
-	echo "nameserver $DNS1" > /system/etc/resolv.conf;
-	echo "nameserver $DMS2" > /system/etc/resolv.conf;
+	echo "nameserver $DNS1" >> /system/etc/resolv.conf;
+	echo "nameserver $DNS2" >> /system/etc/resolv.conf;
 
 	TESTCONNECTION=`wget http://www.google.com -O $TMPFILE > /dev/null 2>&1`;
 	if [ $? != 0 ]; then
