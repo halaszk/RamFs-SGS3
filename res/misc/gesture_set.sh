@@ -163,5 +163,8 @@ do
         input keyevent 3
         
     fi;
+	# Small vibration to provide feedback
+service call vibrator 2 i32 50 i32 0
 
+sleep 1
 done ) > /dev/null 2>&1 &
