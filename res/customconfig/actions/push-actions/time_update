@@ -1,10 +1,8 @@
 #!/sbin/busybox sh
 
-mount -o remount,rw /;
-mount -o remount,rw /system;
-
 TMPFILE=$(mktemp -t);
-HOST_FILE="/system/etc/hosts";
+
+mount -o remount,rw /;
 
 DNS1=`getprop net.rmnet0.dns1`;
 DNS2=`getprop net.rmnet0.dns2`;
@@ -17,10 +15,10 @@ TESTCONNECTION=`wget http://www.google.com -O $TMPFILE > /dev/null 2>&1`;
 if [ $? != 0 ]; then
 	echo "Problem: no internet connection! connect and try again";
 else
-	wget http://winhelp2002.mvps.org/hosts.zip -O $TMPFILE > /dev/null 2>&1;
-	unzip -p $TMPFILE HOSTS > $HOST_FILE;
-	chmod 644 $HOST_FILE;
-	echo "AD Blocker: installed to /system/etc/hosts, reboot to use.";
+	(
+		ntpd -n -q -p `cat /system/etc/gps.conf | grep NTP_SERVER | cut -f 2 -d "="`;
+	)&
+	echo "updated time via ntp";
 fi;
 
 rm -f $TMPFILE;

@@ -72,4 +72,8 @@ pwm_val=75
 up_threshold=30
 gpuandpowersavetweaks=on
 printk_mode=1
-
+crontab=on
+cron_drop_cache=on
+cron_clear_app_cache=off
+cron_fix_permissions=off
+cron_zipaling=on
