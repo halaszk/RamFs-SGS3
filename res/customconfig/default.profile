@@ -77,3 +77,5 @@ cron_drop_cache=on
 cron_clear_app_cache=off
 cron_fix_permissions=off
 cron_zipaling=on
+ad_block_update=off
+gesture_tweak=off

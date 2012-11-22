@@ -29,6 +29,11 @@ fi;
 # update my scripts in case i made change.
 cp -a /res/crontab/cron-scripts/* /data/crontab/cron-scripts/
 
+# add gesture_set.sh with default gustures to data to be used by user.
+if [ ! -e /data/gesture_set.sh ]; then
+ cp -a /res/misc/gesture_set.sh /data/;
+fi;
+
 if [ "$install_root" == "on" ];
 then
   if [ -s /system/xbin/su ];

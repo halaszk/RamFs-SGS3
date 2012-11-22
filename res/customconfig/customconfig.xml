@@ -215,6 +215,12 @@
              <spinnerItem name="200MHz (disabled)" value="16"/>
        </spinner>-->
     </settingsPane>
+	<settingsPane description="Here you can control kernel screen gestures, set at /data/gesture_set.sh. More can be added by user. This tweak depends on cortex background service to be ON"
+	name="Gestures Panel">
+	<checkbox description="Here you can turn on/off kernel built in gestures! See OP for instructions/ask in forum."
+	name="Gestures switch" action="generic_gestures /tmp/gesture_tweak" label="GESTURES SWITCH"/>
+	<button description="Click to reset gestures to default, or update with new one from dev. Gesture file will be added to `/data/` only if it is missing." name="RESET GESTURES" action="push-actions/reset_gestures" label="Reset Gestures"/>
+	</settingsPane>
   </settingsTab>
   <settingsTab name="Misc">
 	<settingsPane description="Here you can run Fix Permissions, Zipalign, DB Optimization script's with one click! please click one time only, scripts will finish in 2~3Min max, no reboot needed." name="FIX PERMISIONS + ZIPALIGN + DB OPTIMIZE">
