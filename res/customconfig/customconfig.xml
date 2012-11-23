@@ -29,7 +29,6 @@
       </spinner>
       <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ)" name="Max CPU Lock" action="generic /sys/devices/system/cpu/cpufreq/pegasusq/max_cpu_lock">
              <spinnerItem name="Quad core mode (unlocked,default)" value="0"/> 
-<!--             <spinnerItem name="Triple core mode" value="3"/> -->
              <spinnerItem name="Dual core mode" value="3"/> 
              <spinnerItem name="Single core mode" value="1"/> 
       </spinner>
@@ -71,8 +70,6 @@
                 name="scaling_max_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq" unit=" kHz" min="800000" reversed="false" step="100000" max="1800000"/>
        <seekBar description="Scaling minimum frequency (Samsung default: 200000)"
                 name="scaling_min_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq" unit=" kHz" min="200000" reversed="false" step="100000" max="500000"/>
-<!--       <seekBar description="Scaling maximum power_save mode Freq (Samsung default: 1000000)"
-                name="cpufreq_max_limit" action="generic /sys/power/cpufreq_max_limit" unit=" kHz" min="600000" reversed="false" step="100000" max="1400000"/>-->
     </settingsPane>
   </settingsTab>
   <settingsTab name="GPU">
@@ -196,7 +193,6 @@
     <settingsPane description="Other screen related settings" name="Other Settings">
        <checkbox description="mDNIe sharpness tweaks from hardcore. Requires reboot to be effective." name="mDNIe Sharpness Tweaks" action="generic /tmp/mdniemod" label="mDNIe Sharpness Tweaks"/>
 	   <checkbox description="GPU UI render and Powersave tweaks enable or disable. This function configure android OS GPU UI debug functions and PM sleep mode" name="GPU and Powersave Tweaks" action="generic /tmp/gpuandpowersavetweaks" label="GPU and Powersave Tweaks"/>
-      <!--<checkbox description="Enable inverting the screen colors by quickly pressing Home button 4 times" name="mDNIe Negative Toggle" action="generic01 /sys/module/gpio_keys/parameters/mdnie_shortcut_enabled" label="mDNIe Negative Toggle"/>-->
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for PeqasusQ"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/ondemand/lcdfreq_enable" label="Dynamic Screen Frequency Scaling For ondemand"/>
 	<seekBar description="Setting min_bl higher will result in staying lowest brightness level for brighter conditions (default 30)"
@@ -237,8 +233,8 @@
 	<spinnerItem name="Set WIFI SCAN 240Sec" value="240"/>
 	<spinnerItem name="Set WIFI SCAN 360Sec" value="360"/>
 	</spinner>
-		<checkbox description="Here you can Allow WIFI to use LOW PWR, by default we use MAX PWR! On LOW PMR get slow speed on wifi transfers, not checked=LOW PWR, checked=HIGH PWR"
-		name="WIFI LOW/HIGH POWER SWITCH" action="generic01 /sys/module/dhd/parameters/wifi_pm" label="WIFI HIGH PWR"/>
+	<checkbox description="Here you can Allow WIFI to use full PWR when screen is OFF, by default we use LOW PWR and get slow speed on wifi transfers, Only when screen is OFF, checked=LOW PWR, not checked=HIGH PWR"
+name="WIFI LOW POWER SWITCH" action="generic /tmp/wifi_pwr" label="WIFI LOW PWR"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default. Lets the hypervisor system share identical memory pages amongst different processes or virtualized guests. This is done by scanning through the memory finding duplicate page." name="KSM_enable" action="generic01 /sys/kernel/mm/ksm/run" label="Kernel SamePage Merging"/>
 		<checkbox description="Sys kernel interface to configure linux printk logging." name="Linux printk logging" action="generic01 /sys/kernel/printk_mode" label="Linux printk logging enable or disable"/>
 
@@ -265,14 +261,13 @@
 	<button description="ZRAM check for active state" name="ZRAM STATS" action="push-actions/zramstats" label="ZRAM STATS"/>
 		<button description="Update time via ntp-server" name="UPDATE TIME" action="push-actions/time_update" label="UPDATE TIME"/>
       <checkbox description="Enable or Disable Android Logger (needs reboot)" name="Android Logger" action="generic /tmp/logger" label="Android Logger"/>
-	<seekBar description="Vibration force level (default 75)" name="Vibration Force" action="generic /sys/vibrator/pwm_val" unit="%" min="0" reversed="false" step="5" max="100"/>
       <spinner description="This will set the default I/O scheduler. Default I/O scheduler will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler" action="generic /sys/block/mmcblk0/queue/scheduler">
              <spinnerItem name="sio" value="sio"/> 
              <spinnerItem name="noop" value="noop"/> 
              <spinnerItem name="deadline" value="deadline"/> 
              <spinnerItem name="vr" value="vr"/> 
              <spinnerItem name="cfq" value="cfq"/> 
-	     <spinnerItem name="bfq" value="bfq"/>
+			 <spinnerItem name="bfq" value="bfq"/>
       </spinner>
 	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="read_ahead_kb">
              <spinnerItem name="512KB" value="512"/> 
@@ -280,11 +275,6 @@
              <spinnerItem name="2048KB" value="2048"/> 
              <spinnerItem name="4096KB" value="4096"/> 
       </spinner>
-     <!-- <spinner description="Notification LED Behavior" name="Notification LED Behavior" action="generic /sys/devices/virtual/sec/led/led_fade">
-             <spinnerItem name="ROM default" value="-1"/> 
-             <spinnerItem name="Blinking" value="0"/> 
-             <spinnerItem name="Fading" value="1"/> 
-      </spinner>-->
 	 <spinner description="Change USB connection mode. Either leave it as default or force it to mass storage mode (you will see your sdcards as disks) or mtp"
 	name="USB Mass Storage Mode" action="usb-mode">
 	<spinnerItem name="Default" value="default"/>
@@ -298,8 +288,7 @@
 			<spinnerItem name="AC/Misc:750mA, USB:650mA(For normal charger and USB2.0 max)" value="3"/> 
 			<spinnerItem name="AC/Misc:1200mA, USB:900mA(risky, may overheat if phone used and only for fast charger and USB3.0)" value="4"/> 
 		</spinner>
-      <!--<checkbox description="If checked, BetterBatteryStatus will report discrete (non-overlapping) wakelock statistics." name="Discrete Wakelock Stats" action="generic01 /sys/module/wakelock/parameters/default_stats" label="Discrete Wakelock Stats"/>-->
-    </settingsPane>
+	</settingsPane>
     <settingsPane description="Removing/Reinstalling root to support some apps which requires you not to have a rooted phone." name="Remove/Reinstall Root">
       <button description="Removes su and Superuser.apk files from the system partition" name="Remove Root" action="remove-root" label="Remove Root"/>
       <checkbox description="If checked, installs root on the next reboot." name="Auto-Install Root" action="generic /tmp/install_root" label="Auto-Install Root"/>
