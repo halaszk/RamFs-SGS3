@@ -268,6 +268,7 @@
              <spinnerItem name="vr" value="vr"/> 
              <spinnerItem name="cfq" value="cfq"/> 
 			 <spinnerItem name="bfq" value="bfq"/>
+			 <spinnerItem name="zen" value="zen"/>
       </spinner>
 	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="read_ahead_kb">
              <spinnerItem name="512KB" value="512"/> 
@@ -288,6 +289,8 @@
 			<spinnerItem name="AC/Misc:750mA, USB:650mA(For normal charger and USB2.0 max)" value="3"/> 
 			<spinnerItem name="AC/Misc:1200mA, USB:900mA(risky, may overheat if phone used and only for fast charger and USB3.0)" value="4"/> 
 		</spinner>
+			<seekBar description="Vibration force level (default 75)"
+name="Vibration Force" action="generic /sys/vibrator/pwm_val" unit="%" min="0" reversed="false" step="5" max="100"/>
 		<button description="Clean the media cache on your sdcard. Push once to clean, push again to abort. You have to reboot for action to work!" name="Clean media-cache" action="push-actions/fix_media" label="FIX MEDIA ON/OFF"/>
 		<button description="Clean WIFI DHCP IP Lease. Push the botton to activate!" name="Clean WIFI Lease" action="push-actions/fix_wifi" label="Clean WIFI Lease"/>
 	</settingsPane>
