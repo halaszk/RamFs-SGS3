@@ -1,0 +1,38 @@
+#!/sbin/busybox sh
+
+# $1 - "sleep_scheduler"
+# $2 - value=
+
+if [ "a$2" == "a" ]; then
+echo "$sleep_scheduler";
+else
+sleep_scheduler=$2;
+echo "$sleep_scheduler";
+fi;
+
+case "${sleep_scheduler}" in
+noop)
+# tweak is in cortex script, will be shut on screen off and loaded on screen on
+;;
+zen)
+# tweak is in cortex script, will be loaded and not be unloaded anymore
+;;
+bfq)
+# tweak is in cortex script, will be unloaded all the time
+;;
+deadline)
+# tweak is in cortex script, will be unloaded all the time
+;;
+sio)
+# tweak is in cortex script, will be unloaded all the time
+;;
+cfq)
+# tweak is in cortex script, will be unloaded all the time
+;;
+vr)
+# tweak is in cortex script, will be unloaded all the time
+;;
+*)
+sleep_scheduler=noop;
+;;
+esac;

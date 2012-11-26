@@ -358,6 +358,24 @@ FIREWALL_TWEAKS;
 # SCREEN-FUNCTIONS
 # ==============================================================
 
+ENABLE_WIFI_PM()
+{
+if [ "$wifi_pwr" == on ]; then
+if [ -e /sys/module/dhd/parameters/wifi_pm ]; then
+echo "1" > /sys/module/dhd/parameters/wifi_pm;
+fi;
+log -p 10 i -t $FILE_NAME "*** WIFI_PM ***: enabled";
+fi;
+}
+
+DISABLE_WIFI_PM()
+{
+if [ -e /sys/module/dhd/parameters/wifi_pm ]; then
+echo "0" > /sys/module/dhd/parameters/wifi_pm;
+log -p 10 i -t $FILE_NAME "*** WIFI_PM ***: disabled";
+fi;
+}
+
 ENABLE_LOGGER()
 {
 	if [ "$android_logger" == auto ] || [ "$android_logger" == debug ]; then
@@ -456,9 +474,24 @@ TUNE_IPV6()
 
 KERNEL_SCHED_AWAKE()
 {
-	echo "10000000" > /proc/sys/kernel/sched_latency_ns;
-	echo "2000000" > /proc/sys/kernel/sched_wakeup_granularity_ns;
-	echo "1500000" > /proc/sys/kernel/sched_min_granularity_ns;
+	case "${cfs_tweaks}" in
+  0)
+    sysctl -w kernel.sched_min_granularity_ns=750000 > /dev/null
+    sysctl -w kernel.sched_latency_ns=10000000 > /dev/null
+    sysctl -w kernel.sched_wakeup_granularity_ns=2000000 > /dev/null
+    ;;
+  1)
+    sysctl -w kernel.sched_min_granularity_ns=750000 > /dev/null
+    sysctl -w kernel.sched_latency_ns=6000000 > /dev/null
+    sysctl -w kernel.sched_wakeup_granularity_ns=1000000 > /dev/null
+    ;;
+  2)
+    sysctl -w kernel.sched_min_granularity_ns=200000 > /dev/null
+    sysctl -w kernel.sched_latency_ns=400000 > /dev/null
+    sysctl -w kernel.sched_wakeup_granularity_ns=100000 > /dev/null
+    ;;
+esac;
+
 	log -p 10  i -t $FILE_NAME "*** KERNEL_SCHED ***: awake";
 }
 
@@ -532,6 +565,8 @@ AWAKE_MODE()
 	ENABLE_NMI;
 
 	AUTO_BRIGHTNESS;
+	
+	DISABLE_WIFI_PM;
 
 	DONT_KILL_CORTEX;
 
@@ -558,6 +593,8 @@ SLEEP_MODE()
 	CROND_SAFETY;
 
 	SWAPPINESS;
+	
+	ENABLE_WIFI_PM;
 
 		if [ "$cortexbrain_cpu" == on ]; then
 			CPU_GOV_TWEAKS;
@@ -572,6 +609,10 @@ SLEEP_MODE()
 		# set settings for battery -> don't wake up "pdflush daemon"
 		echo "$dirty_expire_centisecs_battery" > /proc/sys/vm/dirty_expire_centisecs;
 		echo "$dirty_writeback_centisecs_battery" > /proc/sys/vm/dirty_writeback_centisecs;
+		
+			# set disk I/O sched to noop simple and battery saving.
+		echo "$sleep_scheduler" > /sys/block/mmcblk0/queue/scheduler;
+		echo "$sleep_scheduler" > /sys/block/mmcblk1/queue/scheduler;
 
 		# set battery value
 		echo "10" > /proc/sys/vm/vfs_cache_pressure; # default: 100

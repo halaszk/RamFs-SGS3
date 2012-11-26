@@ -234,7 +234,7 @@
 	<spinnerItem name="Set WIFI SCAN 360Sec" value="360"/>
 	</spinner>
 	<checkbox description="Here you can Allow WIFI to use full PWR when screen is OFF, by default we use LOW PWR and get slow speed on wifi transfers, Only when screen is OFF, checked=LOW PWR, not checked=HIGH PWR"
-	name="WIFI LOW POWER SWITCH" action="generic01 /sys/module/dhd/parameters/wifi_pm" label="WIFI LOW PWR"/>
+	name="WIFI LOW POWER SWITCH" action="generic /tmp/wifi_pwr" label="WIFI LOW PWR"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default. Lets the hypervisor system share identical memory pages amongst different processes or virtualized guests. This is done by scanning through the memory finding duplicate page." name="KSM_enable" action="generic01 /sys/kernel/mm/ksm/run" label="Kernel SamePage Merging"/>
 		<checkbox description="Sys kernel interface to configure linux printk logging." name="Linux printk logging" action="generic01 /sys/kernel/printk_mode" label="Linux printk logging enable or disable"/>
 
@@ -270,6 +270,16 @@
 			 <spinnerItem name="bfq" value="bfq"/>
 			 <spinnerItem name="zen" value="zen"/>
       </spinner>
+	  	<spinner description="This will set the STANDBY/DEEPSLEEP I/O scheduler for internal, system, data and external sdcard. Default is NOOP"
+	name="STANDBY/DEEPSLEEP I/O Scheduler" action="sleep_scheduler">
+             <spinnerItem name="sio" value="sio"/> 
+             <spinnerItem name="noop" value="noop"/> 
+             <spinnerItem name="deadline" value="deadline"/> 
+             <spinnerItem name="vr" value="vr"/> 
+             <spinnerItem name="cfq" value="cfq"/> 
+			 <spinnerItem name="bfq" value="bfq"/>
+			 <spinnerItem name="zen" value="zen"/>
+		</spinner>
 	  <spinner description="This will set the default I/O scheduler Read_Ahead. Default I/O scheduler Read Ahead will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default I/O Scheduler Read Ahead" action="read_ahead_kb">
              <spinnerItem name="512KB" value="512"/> 
              <spinnerItem name="1024KB" value="1024"/> 
