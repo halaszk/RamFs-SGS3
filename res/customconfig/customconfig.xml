@@ -192,7 +192,7 @@
   <settingsTab name="Screen">
     <settingsPane description="Other screen related settings" name="Other Settings">
        <checkbox description="mDNIe sharpness tweaks from hardcore. Requires reboot to be effective." name="mDNIe Sharpness Tweaks" action="generic /tmp/mdniemod" label="mDNIe Sharpness Tweaks"/>
-	   <checkbox description="GPU UI render and Powersave tweaks enable or disable. This function configure android OS GPU UI debug functions and PM sleep mode" name="GPU and Powersave Tweaks" action="generic /tmp/gpuandpowersavetweaks" label="GPU and Powersave Tweaks"/>
+	   <!--<checkbox description="GPU UI render and Powersave tweaks enable or disable. This function configure android OS GPU UI debug functions and PM sleep mode" name="GPU and Powersave Tweaks" action="generic /tmp/gpuandpowersavetweaks" label="GPU and Powersave Tweaks"/>-->
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for PeqasusQ"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/ondemand/lcdfreq_enable" label="Dynamic Screen Frequency Scaling For ondemand"/>
 	<seekBar description="Setting min_bl higher will result in staying lowest brightness level for brighter conditions (default 30)"
@@ -234,7 +234,7 @@
 	<spinnerItem name="Set WIFI SCAN 360Sec" value="360"/>
 	</spinner>
 	<checkbox description="Here you can Allow WIFI to use full PWR when screen is OFF, by default we use LOW PWR and get slow speed on wifi transfers, Only when screen is OFF, checked=LOW PWR, not checked=HIGH PWR"
-name="WIFI LOW POWER SWITCH" action="generic_wifi_pwr /tmp/wifi_pwr" label="WIFI LOW PWR"/>
+	name="WIFI LOW POWER SWITCH" action="generic01 /sys/module/dhd/parameters/wifi_pm" label="WIFI LOW PWR"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default. Lets the hypervisor system share identical memory pages amongst different processes or virtualized guests. This is done by scanning through the memory finding duplicate page." name="KSM_enable" action="generic01 /sys/kernel/mm/ksm/run" label="Kernel SamePage Merging"/>
 		<checkbox description="Sys kernel interface to configure linux printk logging." name="Linux printk logging" action="generic01 /sys/kernel/printk_mode" label="Linux printk logging enable or disable"/>
 
@@ -348,6 +348,59 @@ name="WIFI LOW POWER SWITCH" action="generic_wifi_pwr /tmp/wifi_pwr" label="WIFI
       </spinner>
     </settingsPane>
   </settingsTab>
+
+<settingsTab name="CortexBrain">
+
+<settingsPane description="Here you can manage cortexbrain-tune script" name="Automation Script tuning.">
+
+<spinner description='Enable or Disable the "background-process" from "cortexbrain-tune.sh". If you disable it, you will you lose kernel AI that maintains your device. After enabling it, wait 2sec, then push the "CHECK SERVICE" button to see if service is online.'
+name="Cortexbrain-Background-Process" action="cortexbrain_background_process">
+<spinnerItem name="Enable" value="1"/>
+<spinnerItem name="Disable" value="0"/>
+</spinner>
+
+<button description="Cortex service checker. Click to see if Cortexbrain 'background-process' is running or not" name="CORTEX Service check" action="push-actions/cortexbrain_background_process_check" label="CHECK SERVICE"/>
+
+<spinner description='Here you can control android logger "logcat". If you set it to AUTO, then you will have logs only on screen is on. When screen will be off, logger will be disabled to save battery. If you set DEBUG, it will be working no matter what! If set to DISABLED, logging will be off, no matter what. The tweak depends on Cortexbrain to be enabled. If USB/Charger is connected and logger is set to AUTO, logging will not be disabled so we can debug.'
+name="Android Logger control" action="android_logger">
+<spinnerItem name="AUTO" value="auto"/>
+<spinnerItem name="DEBUG" value="debug"/>
+<spinnerItem name="DISABLED" value="disabled"/>
+</spinner>
+
+<checkbox description='Enable or Disable "Auto-Brightness" function. Depends on Cortexbrain-Background-Process!'
+name="Auto-Brightness" action="generic_cortex /tmp/cortexbrain_auto_tweak_brightness" label="Force Auto-Brightness"/>
+
+<checkbox description='Enable or Disable "Firewall-Tweaks". (To update after change REBOOT)'
+name="Firewall-Tweaks" action="generic_cortex /tmp/cortexbrain_firewall" label="Firewall-Tweaks"/>
+
+<checkbox description='Enable or Disable "TCP-Tweaks". (To update after change REBOOT)'
+name="TCP-Tweaks" action="generic_cortex /tmp/cortexbrain_tcp" label="TCP-Tweaks"/>
+
+<checkbox description='Enable or Disable "IPv6 Network". (Default is OFF. To update after change, turn OFF screen and then turn it ON after 3sec!)'
+name="IPv6 Tweaks" action="generic_cortex /tmp/cortexbrain_ipv6" label="IPv6"/> <!-- I think it's better this way -->
+
+<checkbox description='Enable or Disable "CPU-Tweaks". (To update after change, turn OFF screen and turn it ON after 3sec!)'
+name="CPU-Tweaks" action="generic_cortex /tmp/cortexbrain_cpu" label="CPU-Tweaks"/>
+
+<checkbox description='Enable or Disable "Memory-Tweaks". (To update after change REBOOT)'
+name="Memory-Tweaks" action="generic_cortex /tmp/cortexbrain_memory" label="Memory-Tweaks"/>
+
+<checkbox description='Enable or Disable "Battery-Tweaks". (To update after change REBOOT)'
+name="Battery-Tweaks" action="generic_cortex /tmp/cortexbrain_battery" label="Battery-Tweaks"/>
+
+<checkbox description='Enable or Disable "System-Tweak". (To update after change REBOOT)'
+name="System-Tweaks" action="generic_cortex /tmp/cortexbrain_system" label="System-Tweaks"/>
+
+<checkbox description='Enable or Disable "Kernel-Tweaks". (To update after change REBOOT)'
+name="Kernel-Tweaks" action="generic_cortex /tmp/cortexbrain_kernel_tweaks" label="Kernel-Tweaks"/>
+
+<checkbox description='Enable or Disable "I/O-Tweaks". (To update after change REBOOT)'
+name="I/O-Tweaks" action="generic_cortex /tmp/cortexbrain_io" label="I/O-Tweaks"/>
+</settingsPane>
+
+</settingsTab>  
+
 <settingsTab name="BUG-REPORT">
 
 <settingsPane description="Debug to SD-Card (/sdcard) ..."
