@@ -234,7 +234,7 @@
 	<spinnerItem name="Set WIFI SCAN 360Sec" value="360"/>
 	</spinner>
 	<checkbox description="Here you can Allow WIFI to use full PWR when screen is OFF, by default we use LOW PWR and get slow speed on wifi transfers, Only when screen is OFF, checked=LOW PWR, not checked=HIGH PWR"
-	name="WIFI LOW POWER SWITCH" action="generic /tmp/wifi_pwr" label="WIFI LOW PWR"/>
+	name="WIFI LOW POWER SWITCH" action="generic_wifi_pwr /tmp/wifi_pwr" label="WIFI LOW PWR"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default. Lets the hypervisor system share identical memory pages amongst different processes or virtualized guests. This is done by scanning through the memory finding duplicate page." name="KSM_enable" action="generic01 /sys/kernel/mm/ksm/run" label="Kernel SamePage Merging"/>
 		<checkbox description="Sys kernel interface to configure linux printk logging." name="Linux printk logging" action="generic01 /sys/kernel/printk_mode" label="Linux printk logging enable or disable"/>
 
