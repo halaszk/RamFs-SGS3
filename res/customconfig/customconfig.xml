@@ -288,6 +288,8 @@ name="WIFI LOW POWER SWITCH" action="generic_wifi_pwr /tmp/wifi_pwr" label="WIFI
 			<spinnerItem name="AC/Misc:750mA, USB:650mA(For normal charger and USB2.0 max)" value="3"/> 
 			<spinnerItem name="AC/Misc:1200mA, USB:900mA(risky, may overheat if phone used and only for fast charger and USB3.0)" value="4"/> 
 		</spinner>
+		<button description="Clean the media cache on your sdcard. Push once to clean, push again to abort. You have to reboot for action to work!" name="Clean media-cache" action="push-actions/fix_media" label="FIX MEDIA ON/OFF"/>
+		<button description="Clean WIFI DHCP IP Lease. Push the botton to activate!" name="Clean WIFI Lease" action="push-actions/fix_wifi" label="Clean WIFI Lease"/>
 	</settingsPane>
     <settingsPane description="Removing/Reinstalling root to support some apps which requires you not to have a rooted phone." name="Remove/Reinstall Root">
       <button description="Removes su and Superuser.apk files from the system partition" name="Remove Root" action="remove-root" label="Remove Root"/>

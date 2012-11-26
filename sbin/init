@@ -158,5 +158,36 @@ insmod /lib/modules/vr-iosched.ko
 # audio enhancements
 insmod /lib/modules/kscoobydoo.ko devicename=scoobydoo_sound
 
+# only if asked by user via stweaks
+if [ -e /system/run_fix_media ]; then
+# data mount
+mount -t ext4 /dev/block/mmcblk0p12 /data;
+
+mkdir /sdcardtmp;
+chmod 777 /sdcardtmp;
+mount -t vfat /dev/fuse /sdcardtmp;
+rm /system/run_fix_media;
+
+if [ -e /sdcard/Android/data/ ]; then
+rm -rf /sdcardtmp/Android/data/com.cooliris.media;
+rm -rf /sdcardtmp/Android/data/com.android.gallery3d;
+rm -rf /sdcardtmp/Android/data/com.google.android.gallery3d;
+rm -rf /sdcardtmp/Android/data/com.android.providers.media;
+rm -rf /sdcardtmp/Android/data/com.google.android.music;
+rm -rf /data/data/com.android.providers.media/databases/*;
+fi;
+# sdcard unmount
+sync;
+umount -l /sdcardtmp;
+if [ `du -h /sdcardtmp | grep 4 | cut -c1-4` == "4.0K" ]; then
+rm -rf /sdcardtmp;
+fi;
+
+# data unmount
+sync;
+umount -l /data;
+fi;
+
+
 exec /sbin/init2
 
