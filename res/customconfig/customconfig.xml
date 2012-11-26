@@ -271,7 +271,7 @@
 			 <spinnerItem name="zen" value="zen"/>
       </spinner>
 	  	<spinner description="This will set the STANDBY/DEEPSLEEP I/O scheduler for internal, system, data and external sdcard. Default is NOOP"
-	name="STANDBY/DEEPSLEEP I/O Scheduler" action="sleep_scheduler">
+	name="STANDBY/DEEPSLEEP I/O Scheduler" action="generic_sleep_scheduler /tmp/sleep_scheduler">
              <spinnerItem name="sio" value="sio"/> 
              <spinnerItem name="noop" value="noop"/> 
              <spinnerItem name="deadline" value="deadline"/> 
