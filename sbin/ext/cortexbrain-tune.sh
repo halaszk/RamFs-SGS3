@@ -7,6 +7,7 @@
 # Dorimanx@xda
 # Gokhanmoral@xda
 # Johnbeetee
+# halaszk
 
 # TAKE NOTE THAT LINES PRECEDED BY A "#" IS COMMENTED OUT.
 # This script must be activated after init start =< 25sec or parameters from /sys/* will not be loaded.
@@ -261,15 +262,18 @@ CPU_GOV_TWEAKS()
   echo "400000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_0
   echo "600000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_0
   echo "600000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_4_0
-
   echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_1_1
   echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_0
   echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_1
   echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_0
   echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_1
   echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_4_0
-
+  echo "80" > /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold
+  echo "$max_cpu_lock" > /sys/devices/system/cpu/cpufreq/pegasusq/max_cpu_lock
+  echo "80" > /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold_at_min_freq
   echo "10" > /sys/devices/system/cpu/cpufreq/pegasusq/cpu_down_rate
+  echo "$lcdfreq_enable" > /sys/devices/system/cpu/cpufreq/peqasusq/lcdfreq_enable
+
 
 		log -p 10  i -t $FILE_NAME "*** CPU_GOV_TWEAKS ***: enabled";
 	fi;
@@ -594,6 +598,8 @@ AWAKE_MODE()
 	MEGA_BOOST_CPU_TWEAKS;
 	
 	WAKEUP_BOOST_DELAY;
+	
+	CPU_GOV_TWEAKS;
 
 
 	# set default values
