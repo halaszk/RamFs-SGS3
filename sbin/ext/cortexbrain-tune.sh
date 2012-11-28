@@ -428,6 +428,54 @@ DONT_KILL_CORTEX()
 	log -p 10  i -t $FILE_NAME "*** DONT_KILL_CORTEX ***";
 }
 
+# set wakeup booster delay to prevent mp3 music shattering when screen turned ON
+WAKEUP_DELAY()
+{
+if [ "$wakeup_delay" != 0 ] && [ ! -e /data/.siyah/booting ]; then
+log -p 10  i -t $FILE_NAME "*** WAKEUP_DELAY ${wakeup_delay}sec ***";
+sleep $wakeup_delay
+fi;
+}
+
+WAKEUP_DELAY_SLEEP()
+{
+if [ "$wakeup_delay" != 0 ] && [ ! -e /data/.siyah/booting ]; then
+log -p 10  i -t $FILE_NAME "*** WAKEUP_DELAY_SLEEP ${wakeup_delay}sec ***";
+sleep $wakeup_delay;
+else
+log -p 10  i -t $FILE_NAME "*** WAKEUP_DELAY_SLEEP 3sec ***";
+sleep 3;
+fi;
+}
+
+# check if ROM booting now, then don't wait - creation and deletion of /data/.siyah/booting @> /sbin/ext/post-init.sh
+WAKEUP_BOOST_DELAY()
+{
+if [ ! -e /data/.siyah/booting ] && [ "$wakeup_boost" != 0 ]; then
+log -p 10  i -t $FILE_NAME "*** WAKEUP_BOOST_DELAY ${wakeup_boost}sec ***";
+sleep $wakeup_boost;
+fi;
+}
+
+# boost CPU power for fast and no lag wakeup
+MEGA_BOOST_CPU_TWEAKS()
+{
+if [ "$cortexbrain_cpu" == on ]; then
+
+echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+CPU_GOV_TWEAKS;
+
+if [ "$scaling_max_freq" \> 1100000 ]; then
+echo "$scaling_max_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+else
+echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+fi;
+echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+
+log -p 10  i -t $FILE_NAME "*** MEGA_BOOST_CPU_TWEAKS ***";
+fi;
+}
+
 
 # set less brightnes is battery is low
 AUTO_BRIGHTNESS()
@@ -538,8 +586,14 @@ AWAKE_MODE()
 	ENABLE_LOGGER;
 
 	KERNEL_SCHED_AWAKE;
+	
+	WAKEUP_DELAY;
 
 	ENABLE_GESTURES;
+	
+	MEGA_BOOST_CPU_TWEAKS;
+	
+	WAKEUP_BOOST_DELAY;
 
 
 	# set default values
@@ -555,6 +609,12 @@ AWAKE_MODE()
 	TUNE_IPV6;
 
 	CPU_GOV_TWEAKS;
+	
+	if [ "$cortexbrain_cpu" == on ]; then
+	# set CPU speed
+	echo "$scaling_min_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+	echo "$scaling_max_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	fi;
 
 	# set wifi.supplicant_scan_interval
 	setprop wifi.supplicant_scan_interval $supplicant_scan_interval;
@@ -581,6 +641,12 @@ SLEEP_MODE()
 	# we only read the config when screen goes off ...
 	PROFILE=`cat /data/.siyah/.active.profile`;
 	. /data/.siyah/$PROFILE.profile;
+	
+	WAKEUP_DELAY_SLEEP;
+
+	if [ "$cortexbrain_cpu" == on ]; then
+	echo "$standby_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+	fi;
 
 	KERNEL_SCHED_SLEEP;
 
@@ -596,9 +662,17 @@ SLEEP_MODE()
 	
 	ENABLE_WIFI_PM;
 
-		if [ "$cortexbrain_cpu" == on ]; then
-			CPU_GOV_TWEAKS;
-		fi;
+	if [ "$cortexbrain_cpu" == on ]; then
+# set CPU-Governor
+echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+
+# reduce deepsleep CPU speed, SUSPEND mode
+echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+echo "$scaling_max_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+
+# set CPU-Tweak
+CPU_GOV_TWEAKS;
+fi;
 
 
 		# set wifi.supplicant_scan_interval

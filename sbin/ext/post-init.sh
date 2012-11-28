@@ -67,6 +67,34 @@ mount -o remount,ro /
 ##### Early-init phase tweaks #####
 /sbin/busybox sh /sbin/ext/tweaks.sh
 
+(
+# Stop uci.sh from running all the PUSH Buttons in stweaks on boot.
+mount -o remount,rw rootfs;
+chown root:system /res/customconfig/actions/ -R;
+chmod 6755 /res/customconfig/actions/*;
+chmod 6755 /res/customconfig/actions/push-actions/*;
+mv /res/customconfig/actions/push-actions/* /res/no-push-on-boot/;
+
+# set root access script.
+chmod 6755 /sbin/ext/cortexbrain-tune.sh;
+
+# apply STweaks settings
+echo "booting" > /data/.siyah/booting;
+pkill -f "com.gokhanmoral.stweaks.app";
+sh /res/uci.sh restore;
+
+# restore all the PUSH Button Actions back to there location
+mount -o remount,rw rootfs;
+mv /res/no-push-on-boot/* /res/customconfig/actions/push-actions/;
+pkill -f "com.gokhanmoral.stweaks.app";
+rm -f /data/.siyah/booting;
+# ==============================================================
+# STWEAKS FIXING
+# ==============================================================
+# change USB mode MTP or Mass Storage
+/res/customconfig/actions/usb-mode ${usb_mode};
+)&
+
 /sbin/busybox mount -t rootfs -o remount,ro rootfs
 
 ##### EFS Backup #####
@@ -77,6 +105,13 @@ mount -o remount,ro /
 # apply STweaks defaults
 sleep 12
 /res/uci.sh apply
+
+	PIDOFACORE=`pgrep -f "android.process.acore"`;
+for i in $PIDOFACORE; do
+echo "-800" > /proc/${i}/oom_score_adj;
+renice -15 -p $i;
+log -p 10 i -t boot "*** do not kill -> android.process.acore ***";
+done;
 
 ##### init scripts #####
 /sbin/busybox sh /sbin/ext/run-init-scripts.sh
