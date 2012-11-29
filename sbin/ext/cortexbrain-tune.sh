@@ -466,15 +466,9 @@ MEGA_BOOST_CPU_TWEAKS()
 {
 if [ "$cortexbrain_cpu" == on ]; then
 
-echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
-CPU_GOV_TWEAKS;
-
-if [ "$scaling_max_freq" \> 1000000 ]; then
-echo "$scaling_max_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
-else
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
-fi;
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+echo "266" > /sys/devices/system/gpu/min_freq;
 
 log -p 10  i -t $FILE_NAME "*** MEGA_BOOST_CPU_TWEAKS ***";
 fi;
@@ -501,7 +495,7 @@ AUTO_BRIGHTNESS()
 SWAPPINESS()
 {
 	SWAP_CHECK=`free | grep Swap | awk '{ print $2 }'`;
-	if [ "$zramtweaks" == 4 ] || [ "$SWAP_CHECK" == 0 ]; then
+	if [ "$zram" == 0 ] || [ "$SWAP_CHECK" == 0 ]; then
 		echo "0" > /proc/sys/vm/swappiness;
 		log -p 10  i -t $FILE_NAME "*** SWAPPINESS ***: disabled";
 	else
@@ -592,15 +586,14 @@ AWAKE_MODE()
 	KERNEL_SCHED_AWAKE;
 	
 	WAKEUP_DELAY;
-
-	ENABLE_GESTURES;
+	
+	echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 	
 	MEGA_BOOST_CPU_TWEAKS;
 	
-	WAKEUP_BOOST_DELAY;
+	ENABLE_GESTURES;
 	
-	CPU_GOV_TWEAKS;
-
+	WAKEUP_BOOST_DELAY;
 
 	# set default values
 	echo "$dirty_expire_centisecs_default" > /proc/sys/vm/dirty_expire_centisecs;
@@ -609,8 +602,11 @@ AWAKE_MODE()
 	# set I/O-Scheduler
 	echo "$scheduler" > /sys/block/mmcblk0/queue/scheduler;
 	echo "$scheduler" > /sys/block/mmcblk1/queue/scheduler;
+	echo "$GPUFREQ1" > /sys/devices/system/gpu/min_freq;
 
 	echo "50" > /proc/sys/vm/vfs_cache_pressure;
+	
+	DISABLE_WIFI_PM;
 
 	TUNE_IPV6;
 
@@ -631,8 +627,6 @@ AWAKE_MODE()
 	ENABLE_NMI;
 
 	AUTO_BRIGHTNESS;
-	
-	DISABLE_WIFI_PM;
 
 	DONT_KILL_CORTEX;
 
