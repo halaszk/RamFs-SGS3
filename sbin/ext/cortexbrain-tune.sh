@@ -200,9 +200,7 @@ SYSTEM_TWEAKS()
   /sbin/busybox sysctl -w vm.dirty_ratio=90
   /sbin/busybox sysctl -w vm.dirty_writeback_centisecs=500
   /sbin/busybox sysctl -w vm.min_free_kbytes=4096
-  /sbin/busybox sysctl -w vm.swappiness=60
   /sbin/busybox sysctl -w vm.vfs_cache_pressure=10
-  /sbin/busybox sysctl -w vm.drop_caches=3
 
 # System tweaks: Hardcore speedmod
   # vm tweaks
@@ -667,8 +665,8 @@ SLEEP_MODE()
 echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 
 # reduce deepsleep CPU speed, SUSPEND mode
-echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_suspend_freq;
-echo "$scaling_max_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_suspend_freq;
+echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+echo "$scaling_max_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
 
 # set CPU-Tweak
 CPU_GOV_TWEAKS;
