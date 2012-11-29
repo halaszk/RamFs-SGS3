@@ -469,7 +469,7 @@ if [ "$cortexbrain_cpu" == on ]; then
 echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 CPU_GOV_TWEAKS;
 
-if [ "$scaling_max_freq" \> 1100000 ]; then
+if [ "$scaling_max_freq" \> 1000000 ]; then
 echo "$scaling_max_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
 else
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
@@ -673,8 +673,8 @@ SLEEP_MODE()
 echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 
 # reduce deepsleep CPU speed, SUSPEND mode
-echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
-echo "$scaling_max_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_suspend_freq;
+echo "$scaling_max_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_suspend_freq;
 
 # set CPU-Tweak
 CPU_GOV_TWEAKS;
