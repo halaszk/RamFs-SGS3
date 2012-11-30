@@ -27,7 +27,7 @@
              <spinnerItem name="800MHz" value="10"/>
              <spinnerItem name="500MHz" value="13"/>
       </spinner>
-      <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ)" name="Max CPU Lock" action="generic /sys/devices/system/cpu/cpufreq/pegasusq/max_cpu_lock">
+      <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ)" name="Max CPU Lock" action="generic max_cpu_lock">
              <spinnerItem name="Quad core mode (unlocked,default)" value="0"/> 
              <spinnerItem name="Dual core mode" value="3"/> 
              <spinnerItem name="Single core mode" value="1"/> 
@@ -94,6 +94,7 @@
 		<spinnerItem name="ondemandq" value="ondemandq"/>
              	<spinnerItem name="ondemand" value="ondemand"/>
 		<spinnerItem name="pegasusq" value="pegasusq"/> 
+		<spinnerItem name="abyssplug" value="abyssplug"/>
 <!--		<spinnerItem name="HYPER" value="HYPER"/>
 		<spinnerItem name="sleepy" value="sleepy"/>--> 
 	</spinner>
@@ -219,9 +220,8 @@
   <settingsTab name="Screen">
     <settingsPane description="Other screen related settings" name="Other Settings">
        <checkbox description="mDNIe sharpness tweaks from hardcore. Requires reboot to be effective." name="mDNIe Sharpness Tweaks" action="generic /tmp/mdniemod" label="mDNIe Sharpness Tweaks"/>
-	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for PeqasusQ"/>
-	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/ondemand/lcdfreq_enable" label="Dynamic Screen Frequency Scaling For ondemand"/>
-	<seekBar description="Setting min_bl higher will result in staying lowest brightness level for brighter conditions (default 30)"
+	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic lcdfreq_enable" label="Dynamic Screen Frequency Scaling for CPU Governors"/>
+<seekBar description="Setting min_bl higher will result in staying lowest brightness level for brighter conditions (default 30)"
 	name="min_bl" action="generic /sys/class/misc/brightness_curve/min_bl" unit="" min="0" reversed="false" step="10" max="150"/>
 	<seekBar description="Minimum brightness level (default 0)"
 	name="min_gamma" action="generic /sys/class/misc/brightness_curve/min_gamma" unit="" min="0" reversed="false" step="1" max="24"/>
