@@ -99,3 +99,5 @@ cortexbrain_system=on
 cortexbrain_kernel_tweaks=on
 cortexbrain_io=on
 sleep_scheduler=deadline
+init_d=off
+

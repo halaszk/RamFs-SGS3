@@ -27,7 +27,7 @@
              <spinnerItem name="800MHz" value="10"/>
              <spinnerItem name="500MHz" value="13"/>
       </spinner>
-      <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ)" name="Max CPU Lock" action="generic /tmp/max_cpu_lock">
+      <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ, ondemand)" name="Max CPU Lock" action="generic /tmp/max_cpu_lock">
              <spinnerItem name="Quad core mode (unlocked,default)" value="0"/> 
              <spinnerItem name="Dual core mode" value="3"/> 
              <spinnerItem name="Single core mode" value="1"/> 
@@ -248,6 +248,8 @@
 	<spinnerItem name="Set WIFI SCAN 240Sec" value="240"/>
 	<spinnerItem name="Set WIFI SCAN 360Sec" value="360"/>
 	</spinner>
+	<checkbox description="Enable or Disable INIT.D scripts RUN on boot. Many new ROMS are running the init.d scripts automatically. You can also force running the scripts, but if you run them and ROM runs them too, we have a problem: all scripts are running X2 times! To avoid conflicts, Stweaks RUN-control is disabled by default. If you know that your ROM is NOT supporting init.d script running, then turn it ON here and reboot."
+	name="INIT.D Scripts RUN control" action="generic /tmp/init_d" label="Enable INIT.D scripts RUN-control"/>
 	<checkbox description="Here you can Allow WIFI to use full PWR when screen is OFF, by default we use LOW PWR and get slow speed on wifi transfers, Only when screen is OFF, checked=LOW PWR, not checked=HIGH PWR"
 	name="WIFI LOW POWER SWITCH" action="generic_wifi_pwr /tmp/wifi_pwr" label="WIFI LOW PWR"/>
 	<checkbox description="Enables or disables the mechanic, disabled by default. Lets the hypervisor system share identical memory pages amongst different processes or virtualized guests. This is done by scanning through the memory finding duplicate page." name="KSM_enable" action="generic01 /sys/kernel/mm/ksm/run" label="Kernel SamePage Merging"/>
@@ -401,6 +403,13 @@ name="I/O-Tweaks" action="generic_cortex /tmp/cortexbrain_io" label="I/O-Tweaks"
 <button description="battery.profile" name="battery.profile" action="push-actions/config_backup_restore 1" label="BATTERY"/>
 <button description="default.profile" name="default.profile" action="push-actions/config_backup_restore 2" label="DEFAULT"/>
 <button description="performance.profile" name="performance.profile" action="push-actions/config_backup_restore 3" label="PERFORMANCE"/>
+</settingsPane>
+</settingsTab>
+<settingsTab name="BACKUP/RESTORE">
+<settingsPane description="Here you can Backup / Restore your STWEAKS settings after installing new kernel. When you restore STWEAKS, the application will be closed and your settings will be committed! Some settings will work only after reboot! Wait till STWEAKS restarts with the new settings! Restore will take up to 30sec, just wait here!"
+name="STweaks Settings Backup / Restore.">
+<button description="Backup STweaks User Settings!" name="Settings Backup" action="push-actions/config_backup_restore 1" label="BACKUP NOW"/>
+<button description="Restore STweaks User Settings!" name="Settings Restore" action="push-actions/config_backup_restore 2" label="RESTORE NOW"/>
 </settingsPane>
 </settingsTab>
 <settingsTab name="BUG-REPORT">
