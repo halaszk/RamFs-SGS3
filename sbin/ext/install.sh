@@ -21,11 +21,12 @@ payload_extracted=0
 
 cd /
 
-# copy cron files
-if [ ! -d /data/crontab ]; then
-cp -a /res/crontab /data/
+cp -a /res/crontab/ /data/
+rm -rf /data/crontab/cron/ > /dev/null 2>&1;
+if [ ! -e /data/crontab/custom_jobs ]; then
+touch /data/crontab/custom_jobs;
+chmod 777 /data/crontab/custom_jobs;
 fi;
-
 # update my scripts in case i made change.
 cp -a /res/crontab/cron-scripts/* /data/crontab/cron-scripts/
 
@@ -70,30 +71,42 @@ then
   fi
 fi;
 
-echo "Checking if STweaks is installed"
+GMTWEAKS()
+{
+if [ -f /system/app/STweaks.apk ]; then
 stmd5sum=`/sbin/busybox md5sum /system/app/STweaks.apk | /sbin/busybox awk '{print $1}'`
-if [ "$stmd5sum" == "0936a23cbcf1092be8fba4a8905fcd22" ];then
-installstweaks=1
-fi
+stmd5sum_kernel=`cat /res/stweaks_md5`;
+if [ "$stmd5sum" != "$stmd5sum_kernel" ]; then
+rm -f /system/app/STweaks.apk > /dev/null 2>&1;
+rm -f /data/app/com.gokhanmoral.*weaks*.apk > /dev/null 2>&1;
+rm -f /data/dalvik-cache/*gokhanmoral.*weak*.apk* > /dev/null 2>&1;
+rm -f /cache/dalvik-cache/*gokhanmoral.*weak*.apk* > /dev/null 2>&1;
+fi;
+fi;
 
-if [ ! -f /system/.siyah/stweaks-installed ]; then
-installstweaks=1
-fi
+if [ ! -f /system/app/STweaks.apk ]; then
+rm -f /data/app/com.gokhanmoral.*weak*.apk > /dev/null 2>&1;
+rm -rf /data/data/com.gokhanmoral.*weak* > /dev/null 2>&1;
+rm -f /data/dalvik-cache/*gokhanmoral.*weak*.apk* > /dev/null 2>&1;
+rm -f /cache/dalvik-cache/*gokhanmoral.*weak*.apk* > /dev/null 2>&1;
+cp -a /res/misc/payload/STweaks.apk /system/app/STweaks.apk;
+chown 0.0 /system/app/STweaks.apk;
+chmod 644 /system/app/STweaks.apk;
+fi;
+}
+GMTWEAKS;
 
-if [ "$installstweaks" == "1" ];then
-  rm /system/app/STweaks.apk
-  rm -f /data/app/com.gokhanmoral.STweaks*
-  rm -f /data/dalvik-cache/*STweaks.*
-  rm -f /data/app/com.gokhanmoral.stweaks*
-  rm -f /data/dalvik-cache/*stweaks*
+EXTWEAKS_CLEAN()
+{
+if [ -f /system/app/Extweaks.apk ] || [ -f /data/app/com.darekxan.extweaks.ap*.apk ]; then
+rm -f /system/app/Extweaks.apk > /dev/null 2>&1;
+rm -f /data/app/com.darekxan.extweaks.ap*.apk > /dev/null 2>&1;
+rm -rf /data/data/com.darekxan.extweaks.app > /dev/null 2>&1;
+rm -f /data/dalvik-cache/*com.darekxan.extweaks.app* > /dev/null 2>&1;
+fi;
+}
+EXTWEAKS_CLEAN;
 
-  cat /res/STweaks.apk > /system/app/STweaks.apk
-  chown 0.0 /system/app/STweaks.apk
-  chmod 644 /system/app/STweaks.apk
-  mkdir /system/.siyah
-  chmod 755 /system/.siyah
-  echo 1 > /system/.siyah/stweaks-installed
-fi
 echo "ntfs-3g..."
 if [ ! -s /system/xbin/ntfs-3g ];
 then
@@ -107,5 +120,5 @@ fi
 
 rm -rf /res/misc/payload
 
-/sbin/busybox mount -t rootfs -o remount,ro rootfs
-mount -o remount,ro /system
+/sbin/busybox mount -t rootfs -o remount,rw rootfs
+mount -o remount,rw /system
