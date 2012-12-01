@@ -410,6 +410,10 @@ name="I/O-Tweaks" action="generic_cortex /tmp/cortexbrain_io" label="I/O-Tweaks"
 name="STweaks Settings Backup / Restore.">
 <button description="Backup STweaks User Settings!" name="Settings Backup" action="push-actions/config_backup_restore 1" label="BACKUP NOW"/>
 <button description="Restore STweaks User Settings!" name="Settings Restore" action="push-actions/config_backup_restore 2" label="RESTORE NOW"/>
+	<settingsPane description="Here you can Reinstall/Update your STweak app to one that's added in the kernel. It will be installed to /system and if you had STweaks in /data, it will be removed. Application will close and you'll have it back from kernel in 5sec."
+name="STweaks Reinstall/Update.">
+<button description="Push to Reinstall/Update STweaks app." name="STweaks Reinstall/Update" action="push-actions/stweaks_update" label="STweaks Reinstall/Update"/>
+</settingsPane>
 </settingsPane>
 </settingsTab>
 <settingsTab name="BUG-REPORT">
