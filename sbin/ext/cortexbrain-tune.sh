@@ -451,7 +451,6 @@ echo "0" > $dvfs_debug_tmp;
 echo "0" > $hotplug_lock_tmp;
 echo "$lcdfreq_enable" > $lcdfreq_enable_tmp;
 
-fi;
 		log -p 10  i -t $FILE_NAME "*** CPU_GOV_TWEAKS ***: enabled";
 	fi;
 }
@@ -764,7 +763,7 @@ AWAKE_MODE()
 	
 	WAKEUP_DELAY;
 	
-	echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+	#echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 	
 	MEGA_BOOST_CPU_TWEAKS;
 	
@@ -841,7 +840,7 @@ SLEEP_MODE()
 
 	if [ "$cortexbrain_cpu" == on ]; then
 # set CPU-Governor
-echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+#echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 
 # reduce deepsleep CPU speed, SUSPEND mode
 echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
