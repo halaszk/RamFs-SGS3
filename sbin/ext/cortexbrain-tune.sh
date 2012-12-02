@@ -763,7 +763,8 @@ AWAKE_MODE()
 	
 	WAKEUP_DELAY;
 	
-	#echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+	echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+	cp -a /tmp/$scaling_governor/* /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor/$scaling_governor;
 	
 	MEGA_BOOST_CPU_TWEAKS;
 	
@@ -840,7 +841,11 @@ SLEEP_MODE()
 
 	if [ "$cortexbrain_cpu" == on ]; then
 # set CPU-Governor
-#echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+AWAKE_GOV=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`;
+rm -f /tmp/$AWAKE_GOV;
+mkdir /tmp/$AWAKE_GOV
+cp -a /sys/devices/system/cpu/cpufreq/$AWAKE_GOV/* /tmp/$AWAKE_GOV/;
+echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 
 # reduce deepsleep CPU speed, SUSPEND mode
 echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
