@@ -251,9 +251,9 @@ BATTERY_TWEAKS()
 CPU_GOV_TWEAKS()
 {
 	if [ "$cortexbrain_cpu" == on ]; then
-		SYSTEM_GOVERNOR=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`;
+		SYSTEM_GOVERNOR=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`;		
 		
-		sampling_rate_tmp="/sys/devices/system/cpu/cpufreq/$SYSTEM_GOVERNOR/sampling_rate";
+sampling_rate_tmp="/sys/devices/system/cpu/cpufreq/$SYSTEM_GOVERNOR/sampling_rate";
 
 if [ ! -e $sampling_rate_tmp ]; then
 sampling_rate_tmp="/dev/null";
@@ -364,8 +364,8 @@ fi;
 elif [ "$PROFILE" == battery ]; then
 
 echo "100000" > $sampling_rate_tmp;
-echo "$load_h0" > $cpu_up_rate_tmp;
-echo "$load_l1" > $cpu_down_rate_tmp;
+#echo "$load_h0" > $cpu_up_rate_tmp;
+#echo "$load_l1" > $cpu_down_rate_tmp;
 echo "85" > $up_threshold_tmp;
 echo "80" > $up_threshold_min_freq_tmp;
 echo "60" > $down_threshold_tmp;
@@ -763,8 +763,8 @@ AWAKE_MODE()
 	
 	WAKEUP_DELAY;
 	
-	echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
-	cp -a /tmp/$scaling_governor/* /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor/$scaling_governor;
+#	echo "$scaling_governor" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+#	cp -a /tmp/$scaling_governor/* /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor/$scaling_governor;
 	
 	MEGA_BOOST_CPU_TWEAKS;
 	
@@ -787,7 +787,7 @@ AWAKE_MODE()
 
 	TUNE_IPV6;
 
-	CPU_GOV_TWEAKS;
+	#CPU_GOV_TWEAKS;
 	
 	if [ "$cortexbrain_cpu" == on ]; then
 	# set CPU speed
@@ -840,19 +840,13 @@ SLEEP_MODE()
 	ENABLE_WIFI_PM;
 
 	if [ "$cortexbrain_cpu" == on ]; then
-# set CPU-Governor
-AWAKE_GOV=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`;
-rm -f /tmp/$AWAKE_GOV;
-mkdir /tmp/$AWAKE_GOV
-cp -a /sys/devices/system/cpu/cpufreq/$AWAKE_GOV/* /tmp/$AWAKE_GOV/;
-echo "$deep_sleep" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
 
 # reduce deepsleep CPU speed, SUSPEND mode
 echo "$scaling_min_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
 echo "$scaling_max_suspend_freq" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
 
 # set CPU-Tweak
-CPU_GOV_TWEAKS;
+#CPU_GOV_TWEAKS;
 fi;
 
 
