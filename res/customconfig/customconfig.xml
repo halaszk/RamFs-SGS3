@@ -564,9 +564,9 @@ name="Firewall-Tweaks" action="generic_cortex /tmp/cortexbrain_firewall" label="
 <checkbox description='Enable or Disable "TCP-Tweaks". (To update after change REBOOT)'
 name="TCP-Tweaks" action="generic_cortex /tmp/cortexbrain_tcp" label="TCP-Tweaks"/>
 <checkbox description='Enable or Disable "IPv6 Network". (Default is OFF. To update after change, turn OFF screen and then turn it ON after 3sec!)'
-name="IPv6 Tweaks" action="generic_cortex /tmp/cortexbrain_ipv6" label="IPv6"/> <!-- I think it's better this way -->
-<checkbox description='Enable or Disable "CPU-Tweaks". (To update after change, turn OFF screen and turn it ON after 3sec!)'
-name="CPU-Tweaks" action="generic_cortex /tmp/cortexbrain_cpu" label="CPU-Tweaks"/>
+name="IPv6 Tweaks" action="generic_cortex /tmp/cortexbrain_ipv6" label="IPv6"/>
+<!--<checkbox description='Enable or Disable "CPU-Tweaks". (To update after change, turn OFF screen and turn it ON after 3sec!)'
+name="CPU-Tweaks" action="generic_cortex /tmp/cortexbrain_cpu" label="CPU-Tweaks"/>-->
 <checkbox description='Enable or Disable "Memory-Tweaks". (To update after change REBOOT)'
 name="Memory-Tweaks" action="generic_cortex /tmp/cortexbrain_memory" label="Memory-Tweaks"/>
 <checkbox description='Enable or Disable "Battery-Tweaks". (To update after change REBOOT)'
