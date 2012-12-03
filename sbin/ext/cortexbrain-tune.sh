@@ -254,7 +254,6 @@ CPU_GOV_TWEAKS()
 		SYSTEM_GOVERNOR=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`;		
 		
 sampling_rate_tmp="/sys/devices/system/cpu/cpufreq/$SYSTEM_GOVERNOR/sampling_rate";
-
 if [ ! -e $sampling_rate_tmp ]; then
 sampling_rate_tmp="/dev/null";
 fi;
@@ -395,8 +394,8 @@ echo "$lcdfreq_enable" > $lcdfreq_enable_tmp;
 elif [ "$PROFILE" == default ]; then
 
 echo "70000" > $sampling_rate_tmp;
-echo "$load_h0" > $cpu_up_rate_tmp;
-echo "$load_l1" > $cpu_down_rate_tmp;
+#echo "$load_h0" > $cpu_up_rate_tmp;
+#echo "$load_l1" > $cpu_down_rate_tmp;
 echo "80" > $up_threshold_tmp;
 echo "70" > $up_threshold_min_freq_tmp;
 echo "40" > $down_threshold_tmp;
@@ -425,8 +424,8 @@ echo "$lcdfreq_enable" > $lcdfreq_enable_tmp;
 elif [ "$PROFILE" == performance ]; then
 
 echo "60000" > $sampling_rate_tmp;
-echo "$load_h0" > $cpu_up_rate_tmp;
-echo "$load_l1" > $cpu_down_rate_tmp;
+#echo "$load_h0" > $cpu_up_rate_tmp;
+#echo "$load_l1" > $cpu_down_rate_tmp;
 echo "80" > $up_threshold_tmp;
 echo "80" > $up_threshold_min_freq_tmp;
 echo "30" > $down_threshold_tmp;

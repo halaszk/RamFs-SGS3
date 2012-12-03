@@ -11,17 +11,17 @@ else
 fi;
 
 case "${config_backup_restore}" in
-	1)
+	3)
 		file2="/res/customconfig/battery.profile";
 		echo "battery" > /data/.siyah/.active.profile;
 		config_backup_restore=2;
 	;;
-	2)
+	4)
 		file2="/res/customconfig/default.profile";
 		echo "default" > /data/.siyah/.active.profile;
 		config_backup_restore=2;
 	;;
-	3)
+	5)
 		file2="/res/customconfig/performance.profile";
 		echo "performance" > /data/.siyah/.active.profile;
 		config_backup_restore=2;

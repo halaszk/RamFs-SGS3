@@ -400,9 +400,9 @@ name="I/O-Tweaks" action="generic_cortex /tmp/cortexbrain_io" label="I/O-Tweaks"
 </settingsTab>  
 <settingsTab name="PROFILES">
 <settingsPane description="Here you can choose some profiles. You can also switch the default profiles (default) via Kernel-Recovery." name="STweaks Profiles.">
-<button description="battery.profile" name="battery.profile" action="push-actions/config_backup_restore 1" label="BATTERY"/>
-<button description="default.profile" name="default.profile" action="push-actions/config_backup_restore 2" label="DEFAULT"/>
-<button description="performance.profile" name="performance.profile" action="push-actions/config_backup_restore 3" label="PERFORMANCE"/>
+<button description="battery.profile" name="battery.profile" action="push-actions/config_backup_restore 3" label="BATTERY"/>
+<button description="default.profile" name="default.profile" action="push-actions/config_backup_restore 4" label="DEFAULT"/>
+<button description="performance.profile" name="performance.profile" action="push-actions/config_backup_restore 5" label="PERFORMANCE"/>
 </settingsPane>
 </settingsTab>
 <settingsTab name="BACKUP/RESTORE">
