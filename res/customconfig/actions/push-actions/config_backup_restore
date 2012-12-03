@@ -26,6 +26,16 @@ case "${config_backup_restore}" in
 		echo "performance" > /data/.siyah/.active.profile;
 		config_backup_restore=2;
 	;;
+	6)
+		file2="/res/customconfig/extreme_battery.profile";
+		echo "extreme_battery" > /data/.siyah/.active.profile;
+		config_backup_restore=2;
+	;;
+	7)
+		file2="/res/customconfig/extreme_performance.profile";
+		echo "extreme_performance" > /data/.siyah/.active.profile;
+		config_backup_restore=2;
+	;;
 	*)
 		PROFILE=`cat /data/.siyah/.active.profile`;
 		file2="/data/.siyah/$PROFILE.profile_backup";
