@@ -33,7 +33,7 @@
              <spinnerItem name="400MHz" value="400000"/>
              <spinnerItem name="200MHz" value="200000"/>
       </spinner>
-      <spinner description="Set the freqency threshold beyond which we use aggressive down-scaling. Default:  MHz." 
+      <spinner description="Set the freqency threshold beyond which we use aggressive down-scaling. Default:  1200MHz." 
                name="Frequency for fast-down" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/freq_for_fast_down">
 	     <spinnerItem name="1200MHz" value="1200000"/>
@@ -45,39 +45,39 @@
       </spinner>
       <seekBar description="Sets the sched_mc value which changes the cpu scheduler behaviour for multi-cpu systems. 0 is Samsung kernel's default value which turns sched_mc off. Setting it to 1 means that the first core will be tried to be loaded more and setting it to 2 will bias task wake-ups to semi-idle cpu package for power savings. (default: 0)" name="sched_mc" action="generic /sys/devices/system/cpu/sched_mc_power_savings" unit="" min="0" reversed="false" step="1" max="2"/>
       <seekBar description="This is for CPU BUS-FREQ UP-FREQ-Scaling, based on CPU load! default=23%" name="busfreq_up_threshold" action="generic /sys/devices/system/cpu/busfreq/up_threshold" unit="%" min="20" reversed="false" step="1" max="90"/>
-	<seekBar description="The sampling period size in which the governor polls CPU load and triggers its decision making. Default:  µS." 
+	<seekBar description="The sampling period size in which the governor polls CPU load and triggers its decision making. Default:  120000µS." 
                name="Sampling rate" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/sampling_rate"
                unit="µS" min="10000" reversed="false" step="1000" max="100000"/>
-      <seekBar description="If we scale up to the maximum policy frequency, extend the next sample period by a factor of so much. Default:  samples." 
+      <seekBar description="If we scale up to the maximum policy frequency, extend the next sample period by a factor of so much. Default: 1 samples." 
                name="Sampling down factor" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/sampling_down_factor"
                unit="samples" min="1" reversed="false" step="1" max="10"/>
-      <seekBar description="If the load exceeds the up threshold percentage on a single core, we trigger the scaling up logic. Default: %." 
+      <seekBar description="If the load exceeds the up threshold percentage on a single core, we trigger the scaling up logic. Default: 82%." 
                name="Up threshold" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold"
                unit="%" min="11" reversed="false" step="1" max="99"/>
-      <seekBar description="When targeting a frequency when scaling down, aim for a target which accomodates the current load without triggering the up threshold minus the differential value. Default: %." 
+      <seekBar description="When targeting a frequency when scaling down, aim for a target which accomodates the current load without triggering the up threshold minus the differential value. Default: 5%." 
                name="Down differential" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/down_differential"
                unit="%" min="0" reversed="false" step="1" max="50"/>
-      <seekBar description="If the frequency is below the frequency for responsiveness, use this as the up threshold. Default: %." 
+      <seekBar description="If the frequency is below the frequency for responsiveness, use this as the up threshold. Default: 40%." 
                name="Up threshold at min freq" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold_at_min_freq"
                unit="%" min="11" reversed="false" step="1" max="99"/>
-	<seekBar description="If the frequency is beyond the frequency for fast-down, use this as the up threshold. Default: %." 
+	<seekBar description="If the frequency is beyond the frequency for fast-down, use this as the up threshold. Default: 95%." 
                name="Up threshold at fast-down" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold_at_fast_down"
                unit="%" min="11" reversed="false" step="1" max="99"/>
-      <seekBar description="When the up threshold is triggered, increase the CPU frequency by this percentage of the maximum frequency policy. This value gets dissected in the next two settings. Default: %."
+      <seekBar description="When the up threshold is triggered, increase the CPU frequency by this percentage of the maximum frequency policy. This value gets dissected in the next two settings. Default: 20%."
                name="Frequency step" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/freq_step"
                unit="%" min="1" reversed="false" step="1" max="100"/>
-      <seekBar description="The remainder of load space above the up threshold is dissected into three slices each having different frequency increase step sizes. The first two slices are each of up threshold differential size, lop-sided towards the lower end of the load scale. Default: %."
+      <seekBar description="The remainder of load space above the up threshold is dissected into three slices each having different frequency increase step sizes. The first two slices are each of up threshold differential size, lop-sided towards the lower end of the load scale. Default: 6%."
                name="Up threshold differential" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold_diff"
                unit="%" min="0" reversed="false" step="1" max="20"/>
-      <seekBar description="If we are in the first up threshold slice, we decrease the frequency step by twice this amount. The second slice decreases it once. In the last remaining slice the freq step value is taken as is. Default: %."
+      <seekBar description="If we are in the first up threshold slice, we decrease the frequency step by twice this amount. The second slice decreases it once. In the last remaining slice the freq step value is taken as is. Default: 13%."
                name="Frequency step decrease" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/freq_step_dec"
                unit="%" min="0" reversed="false" step="1" max="33"/>
@@ -88,7 +88,7 @@
                 name="Flexrate enable" 
                 action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_enable" 
                 label="Enable flexrate requests"/>
-      <spinner description="Set the freqency threshold beyond which we ignore flexrate requests. Default:  MHz." 
+      <spinner description="Set the freqency threshold beyond which we ignore flexrate requests. Default:  800MHz." 
                name="Flexrate max freq" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_max_freq">
              <spinnerItem name="1200MHz" value="1200000"/>
@@ -98,7 +98,7 @@
              <spinnerItem name="400MHz" value="400000"/>
              <spinnerItem name="200MHz" value="200000"/>
       </spinner>
-      <seekBar description="If set to anything else than zero, ignores the flexrate request rate and uses this one instead. Ignores values under 10000. Default: µS."
+      <seekBar description="If set to anything else than zero, ignores the flexrate request rate and uses this one instead. Ignores values under 10000. Default: 0µS."
                name="Flexrate force-rate" 
                action="generic /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_forcerate"
                unit="µS" min="0" reversed="false" step="500" max="30000"/>
@@ -139,16 +139,16 @@
        <seekBar description="Scaling maximum frequency (Samsung default: 1400000)"
                 name="scaling_max_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq" unit=" kHz" min="800000" reversed="false" step="100000" max="1800000"/>
        <seekBar description="Scaling minimum frequency (Samsung default: 200000)"
-                name="scaling_min_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq" unit=" kHz" min="200000" reversed="false" step="100000" max="500000"/>
+                name="scaling_min_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq" unit=" kHz" min="100000" reversed="false" step="100000" max="500000"/>
 	<seekBar description="Maximum DEEP SLEEP CPU Speed. Default is Linux Kernel default value: 600000. Samsung default value is 800000. Setting this too low will stuck your device!"
 		name="scaling_max_suspend_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_suspend_freq"
 		unit="kHz" min="100000" reversed="false" step="100000" max="1000000"/>
 	<seekBar description="Minimum DEEP SLEEP CPU Speed (default is 200000)"
 		name="scaling_min_suspend_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_suspend_freq"
-		unit="kHz" min="200000" reversed="false" step="100000" max="1000000"/>
+		unit="kHz" min="100000" reversed="false" step="100000" max="1000000"/>
 	<seekBar description="Minimum Standby (music playing on screen off) CPU Speed. Default is 200000kHz. If music still shutter, rise to 300000/400000kHz"
 		name="scaling_min_standby_freq" action="generic /tmp/standby_freq"
-		unit="kHz" min="200000" reversed="false" step="100000" max="1000000"/>
+		unit="kHz" min="100000" reversed="false" step="100000" max="1000000"/>
 	<seekBar description="For developer debug only! You can add small delay to cortex wakeup/sleep script. This will delay all function changes and the wakeup! Default value is 0."
 		name="Cortex Wakeup Delay" action="generic /tmp/wakeup_delay"
 		unit="Sec" min="0" reversed="false" step="1" max="5"/>
