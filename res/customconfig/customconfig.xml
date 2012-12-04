@@ -398,7 +398,7 @@
   <settingsTab name="Screen">
     <settingsPane description="Other screen related settings" name="Other Settings">
        <checkbox description="mDNIe sharpness tweaks from hardcore. Requires reboot to be effective." name="mDNIe Sharpness Tweaks" action="generic /tmp/mdniemod" label="mDNIe Sharpness Tweaks"/>
-	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for CPU Governors"/>
+	<checkbox description="Enables or disables the mechanic, disabled by default" name="LCDfreq_enable" action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/lcdfreq_enable" label="Dynamic Screen Frequency Scaling for CPU Governors"/>
 <seekBar description="Setting min_bl higher will result in staying lowest brightness level for brighter conditions (default 30)"
 	name="min_bl" action="generic /sys/class/misc/brightness_curve/min_bl" unit="" min="0" reversed="false" step="10" max="150"/>
 	<seekBar description="Minimum brightness level (default 0)"
