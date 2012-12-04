@@ -18,90 +18,13 @@
              <spinnerItem name="AFTR only" value="1"/> 
              <spinnerItem name="Idle only" value="0"/> 
       </spinner>
-
-      <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ, ondemand)" name="Max CPU Lock" action="generic /tmp/max_cpu_lock">
+      <spinner description="Sets the number of CPUs to be used in hotplugging (only for PegasusQ, ondemand)" name="Max CPU Lock" action="generic /sys/devices/system/cpu/cpufreq/pegasusq/max_cpu_lock">
              <spinnerItem name="Quad core mode (unlocked,default)" value="0"/> 
              <spinnerItem name="Dual core mode" value="3"/> 
              <spinnerItem name="Single core mode" value="1"/> 
       </spinner>
-      <spinner description="Set the freqency threshold below which we use aggressive up-scaling. Default: 400MHz." 
-               name="Frequency for responsiveness" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/freq_for_responsiveness">
-             <spinnerItem name="1000MHz" value="1000000"/>
-             <spinnerItem name="800MHz" value="800000"/>
-             <spinnerItem name="600MHz" value="600000"/>
-             <spinnerItem name="400MHz" value="400000"/>
-             <spinnerItem name="200MHz" value="200000"/>
-      </spinner>
-      <spinner description="Set the freqency threshold beyond which we use aggressive down-scaling. Default:  1200MHz." 
-               name="Frequency for fast-down" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/freq_for_fast_down">
-	     <spinnerItem name="1200MHz" value="1200000"/>
-             <spinnerItem name="1000MHz" value="1000000"/>
-             <spinnerItem name="800MHz" value="800000"/>
-             <spinnerItem name="600MHz" value="600000"/>
-             <spinnerItem name="400MHz" value="400000"/>
-             <spinnerItem name="200MHz" value="200000"/>
-      </spinner>
       <seekBar description="Sets the sched_mc value which changes the cpu scheduler behaviour for multi-cpu systems. 0 is Samsung kernel's default value which turns sched_mc off. Setting it to 1 means that the first core will be tried to be loaded more and setting it to 2 will bias task wake-ups to semi-idle cpu package for power savings. (default: 0)" name="sched_mc" action="generic /sys/devices/system/cpu/sched_mc_power_savings" unit="" min="0" reversed="false" step="1" max="2"/>
       <seekBar description="This is for CPU BUS-FREQ UP-FREQ-Scaling, based on CPU load! default=23%" name="busfreq_up_threshold" action="generic /sys/devices/system/cpu/busfreq/up_threshold" unit="%" min="20" reversed="false" step="1" max="90"/>
-	<seekBar description="The sampling period size in which the governor polls CPU load and triggers its decision making. Default:  120000µS." 
-               name="Sampling rate" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/sampling_rate"
-               unit="µS" min="10000" reversed="false" step="1000" max="100000"/>
-      <seekBar description="If we scale up to the maximum policy frequency, extend the next sample period by a factor of so much. Default: 1 samples." 
-               name="Sampling down factor" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/sampling_down_factor"
-               unit="samples" min="1" reversed="false" step="1" max="10"/>
-      <seekBar description="If the load exceeds the up threshold percentage on a single core, we trigger the scaling up logic. Default: 82%." 
-               name="Up threshold" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold"
-               unit="%" min="11" reversed="false" step="1" max="99"/>
-      <seekBar description="When targeting a frequency when scaling down, aim for a target which accomodates the current load without triggering the up threshold minus the differential value. Default: 5%." 
-               name="Down differential" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/down_differential"
-               unit="%" min="0" reversed="false" step="1" max="50"/>
-      <seekBar description="If the frequency is below the frequency for responsiveness, use this as the up threshold. Default: 40%." 
-               name="Up threshold at min freq" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold_at_min_freq"
-               unit="%" min="11" reversed="false" step="1" max="99"/>
-	<seekBar description="If the frequency is beyond the frequency for fast-down, use this as the up threshold. Default: 95%." 
-               name="Up threshold at fast-down" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold_at_fast_down"
-               unit="%" min="11" reversed="false" step="1" max="99"/>
-      <seekBar description="When the up threshold is triggered, increase the CPU frequency by this percentage of the maximum frequency policy. This value gets dissected in the next two settings. Default: 20%."
-               name="Frequency step" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/freq_step"
-               unit="%" min="1" reversed="false" step="1" max="100"/>
-      <seekBar description="The remainder of load space above the up threshold is dissected into three slices each having different frequency increase step sizes. The first two slices are each of up threshold differential size, lop-sided towards the lower end of the load scale. Default: 6%."
-               name="Up threshold differential" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_threshold_diff"
-               unit="%" min="0" reversed="false" step="1" max="20"/>
-      <seekBar description="If we are in the first up threshold slice, we decrease the frequency step by twice this amount. The second slice decreases it once. In the last remaining slice the freq step value is taken as is. Default: 13%."
-               name="Frequency step decrease" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/freq_step_dec"
-               unit="%" min="0" reversed="false" step="1" max="33"/>
-    </settingsPane>
-	<settingsPane description="Tuneables for flexrate requests; accelerated sampling speed when the screen is touched." 
-                  name="Flexrate settings">
-      <checkbox description="If enabled, flexrate requests are handled and sampling speed will be accelerated" 
-                name="Flexrate enable" 
-                action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_enable" 
-                label="Enable flexrate requests"/>
-      <spinner description="Set the freqency threshold beyond which we ignore flexrate requests. Default:  800MHz." 
-               name="Flexrate max freq" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_max_freq">
-             <spinnerItem name="1200MHz" value="1200000"/>
-             <spinnerItem name="1000MHz" value="1000000"/>
-             <spinnerItem name="800MHz" value="800000"/>
-             <spinnerItem name="600MHz" value="600000"/>
-             <spinnerItem name="400MHz" value="400000"/>
-             <spinnerItem name="200MHz" value="200000"/>
-      </spinner>
-      <seekBar description="If set to anything else than zero, ignores the flexrate request rate and uses this one instead. Ignores values under 10000. Default: 0µS."
-               name="Flexrate force-rate" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_forcerate"
-               unit="µS" min="0" reversed="false" step="500" max="30000"/>
     </settingsPane>
 	<settingsPane description=""
 	name="CPU Undervolting">
@@ -157,27 +80,84 @@
 		unit="Sec" min="0" reversed="false" step="1" max="15"/>
     </settingsPane>
   </settingsTab>
-<settingsTab name="CPU Hotplug">
+<settingsTab name="CPU Governor">
     <settingsPane description="Tuneables for CPU hotplug, online-ing and offline-ing of cores on light use when not being used." 
                   name="Scaling speed">
+ <spinner description="Set the freqency threshold below which we use aggressive up-scaling. Default: 400MHz." 
+               name="Frequency for responsiveness" 
+               action="cpu-governor freq_for_responsiveness">
+             <spinnerItem name="1000MHz" value="1000000"/>
+             <spinnerItem name="800MHz" value="800000"/>
+             <spinnerItem name="600MHz" value="600000"/>
+             <spinnerItem name="500MHz" value="500000"/>
+			 <spinnerItem name="400MHz" value="400000"/>
+             <spinnerItem name="200MHz" value="200000"/>
+      </spinner>
+      <spinner description="Set the freqency threshold beyond which we use aggressive down-scaling. Default:  1200MHz." 
+               name="Frequency for fast-down" 
+               action="cpu-governor freq_for_fast_down">
+	     <spinnerItem name="1200MHz" value="1200000"/>
+             <spinnerItem name="1000MHz" value="1000000"/>
+             <spinnerItem name="800MHz" value="800000"/>
+             <spinnerItem name="600MHz" value="600000"/>
+			 <spinnerItem name="500MHz" value="500000"/>
+             <spinnerItem name="400MHz" value="400000"/>
+             <spinnerItem name="200MHz" value="200000"/>
+      </spinner>
+	  <seekBar description="The sampling period size in which the governor polls CPU load and triggers its decision making. Default:  120000µS." 
+               name="Sampling rate" 
+               action="cpu-governor sampling_rate"
+               unit="µS" min="10000" reversed="false" step="1000" max="100000"/>
+      <seekBar description="If we scale up to the maximum policy frequency, extend the next sample period by a factor of so much. Default: 1 samples." 
+               name="Sampling down factor" 
+               action="cpu-governor sampling_down_factor"
+               unit="samples" min="1" reversed="false" step="1" max="10"/>
+      <seekBar description="If the load exceeds the up threshold percentage on a single core, we trigger the scaling up logic. Default: 82%." 
+               name="Up threshold" 
+               action="cpu-governor up_threshold"
+               unit="%" min="11" reversed="false" step="1" max="99"/>
+      <seekBar description="When targeting a frequency when scaling down, aim for a target which accomodates the current load without triggering the up threshold minus the differential value. Default: 5%." 
+               name="Down differential" 
+               action="cpu-governor down_differential"
+               unit="%" min="0" reversed="false" step="1" max="50"/>
+      <seekBar description="If the frequency is below the frequency for responsiveness, use this as the up threshold. Default: 40%." 
+               name="Up threshold at min freq" 
+               action="cpu-governor up_threshold_at_min_freq"
+               unit="%" min="11" reversed="false" step="1" max="99"/>
+	<seekBar description="If the frequency is beyond the frequency for fast-down, use this as the up threshold. Default: 95%." 
+               name="Up threshold at fast-down" 
+               action="cpu-governor up_threshold_at_fast_down"
+               unit="%" min="11" reversed="false" step="1" max="99"/>
+      <seekBar description="When the up threshold is triggered, increase the CPU frequency by this percentage of the maximum frequency policy. This value gets dissected in the next two settings. Default: 20%."
+               name="Frequency step" 
+               action="cpu-governor freq_step"
+               unit="%" min="1" reversed="false" step="1" max="100"/>
+      <seekBar description="The remainder of load space above the up threshold is dissected into three slices each having different frequency increase step sizes. The first two slices are each of up threshold differential size, lop-sided towards the lower end of the load scale. Default: 6%."
+               name="Up threshold differential" 
+               action="cpu-governor up_threshold_diff"
+               unit="%" min="0" reversed="false" step="1" max="20"/>
+      <seekBar description="If we are in the first up threshold slice, we decrease the frequency step by twice this amount. The second slice decreases it once. In the last remaining slice the freq step value is taken as is. Default: 13%."
+               name="Frequency step decrease" 
+               action="cpu-governor freq_step_dec"
+               unit="%" min="0" reversed="false" step="1" max="33"/>
       <seekBar description="The rate in governor samples at which a hotplug in decision takes place. Default: 16 sample(s)."
                name="CPU up rate" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/cpu_up_rate"
+               action="cpu-governor cpu_up_rate"
                unit="sample(s)" min="1" reversed="false" step="1" max="40"/>
       <seekBar description="The rate in governor samples at which a hotplug out decision takes place. Default: 30 sample(s)."
                name="CPU down rate" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/cpu_down_rate"
+               action="cpu-governor cpu_down_rate"
                unit="sample(s)" min="1" reversed="false" step="1" max="40"/>
       <seekBar description="The number of cores to bring up online when a hotplug in decision is triggered. Default: 1 core(s)."
                name="Core upbring-count" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/up_nr_cpus"
+               action="cpu-governor up_nr_cpus"
                unit="core(s)" min="1" reversed="false" step="1" max="4"/>
     </settingsPane>
     <settingsPane description="To bring up a core, all of the given conditions must be fulfilled. The governor analyses the up/down rate amount of sample information collected to this point, and taking the roof of each value type over the whole rate period. If the conditions from the starting point of the current core count are met, it triggers a CPU up or down. The frequency thresholds are the maximum frequency reached during the whole rate period. The runqueue thresholds are the 100th factor of the thread count averages running on the system." 
                   name="Hotplug conditionals">
       <spinner description="Freqency threshold to bring up a core if 1 online. Default: 500MHz." 
                name="Hotplug freq from 1 core to online" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_1_1">
+               action="cpu-governor hotplug_freq_1_1">
              <spinnerItem name="1200MHz" value="1200000"/>
              <spinnerItem name="1000MHz" value="1000000"/>
              <spinnerItem name="800MHz" value="800000"/>
@@ -187,7 +167,7 @@
       </spinner>
       <spinner description="Freqency threshold to bring down a core if 2 online. Default:  200MHz." 
                name="Hotplug freq from 2 cores to offline" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_0">
+               action="cpu-governor hotplug_freq_2_0">
              <spinnerItem name="1200MHz" value="1200000"/>
              <spinnerItem name="1000MHz" value="1000000"/>
              <spinnerItem name="800MHz" value="800000"/>
@@ -197,7 +177,7 @@
       </spinner>
       <spinner description="Freqency threshold to bring up a core if 2 online. Default:  500MHz." 
                name="Hotplug freq from 2 cores to online" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_1">
+               action="cpu-governor hotplug_freq_2_1">
              <spinnerItem name="1200MHz" value="1200000"/>
              <spinnerItem name="1000MHz" value="1000000"/>
              <spinnerItem name="800MHz" value="800000"/>
@@ -207,7 +187,7 @@
       </spinner>
       <spinner description="Freqency threshold to bring down a core if 3 online. Default:  200MHz." 
                name="Hotplug freq from 3 cores to offline" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_0">
+               action="cpu-governor hotplug_freq_3_0">
              <spinnerItem name="1200MHz" value="1200000"/>
              <spinnerItem name="1000MHz" value="1000000"/>
              <spinnerItem name="800MHz" value="800000"/>
@@ -217,7 +197,7 @@
       </spinner>
       <spinner description="Freqency threshold to bring up a core if 3 online. Default:  800MHz." 
                name="Hotplug freq from 3 core to online" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_1">
+               action="cpu-governor hotplug_freq_3_1">
              <spinnerItem name="1200MHz" value="1200000"/>
              <spinnerItem name="1000MHz" value="1000000"/>
              <spinnerItem name="800MHz" value="800000"/>
@@ -227,7 +207,7 @@
       </spinner>
       <spinner description="Freqency threshold to bring down a core if 4 online. Default:  400MHz." 
                name="Hotplug freq from 4 cores to offline" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_4_0">
+               action="cpu-governor hotplug_freq_4_0">
              <spinnerItem name="1200MHz" value="1200000"/>
              <spinnerItem name="1000MHz" value="1000000"/>
              <spinnerItem name="800MHz" value="800000"/>
@@ -237,42 +217,64 @@
       </spinner>
       <seekBar description="Runqueue threshold to bring up a core if 1 online. Default: 175 thread depth."
                name="Runqueue depth from 1 core to online" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_1_1"
+               action="cpu-governor hotplug_rq_1_1"
                unit=" thread depth" min="100" reversed="false" step="5" max="600"/>
       <seekBar description="Runqueue threshold to bring down a core if 2 online. Default: 175 thread depth."
                name="Runqueue depth from 2 core to offline" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_0"
+               action="cpu-governor hotplug_rq_2_0"
                unit="thread depth" min="100" reversed="false" step="5" max="600"/>
       <seekBar description="Runqueue threshold to bring up a core if 2 online. Default: 275 thread depth."
                name="Runqueue depth from 2 cores to online" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_1"
+               action="cpu-governor hotplug_rq_2_1"
                unit="thread depth" min="100" reversed="false" step="5" max="600"/>
       <seekBar description="Runqueue threshold to bring down a core if 3 online. Default: 275 thread depth."
                name="Runqueue depth from 3 core to offline" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_0"
+               action="cpu-governor hotplug_rq_3_0"
                unit="thread depth" min="100" reversed="false" step="5" max="600"/>
       <seekBar description="Runqueue threshold to bring up a core if 2 online. Default: 375 thread depth."
                name="Runqueue depth from 3 cores to online" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_1"
+               action="cpu-governor hotplug_rq_3_1"
                unit="thread depth" min="100" reversed="false" step="5" max="600"/>
       <seekBar description="Runqueue threshold to bring down a core if 4 online. Default: 375 thread depth."
                name="Runqueue depth from 4 core to offline" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_4_0"
+               action="cpu-governor hotplug_rq_4_0"
                unit="thread depth" min="100" reversed="false" step="5" max="600"/>
+    </settingsPane>
+		<settingsPane description="Tuneables for flexrate requests; accelerated sampling speed when the screen is touched." 
+                  name="Flexrate settings">
+      <checkbox description="If enabled, flexrate requests are handled and sampling speed will be accelerated" 
+                name="Flexrate enable" 
+                action="generic01 /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_enable" 
+                label="Enable flexrate requests"/>
+      <spinner description="Set the freqency threshold beyond which we ignore flexrate requests. Default:  800MHz." 
+               name="Flexrate max freq" 
+               action="cpu-governor flexrate_max_freq">
+             <spinnerItem name="1200MHz" value="1200000"/>
+             <spinnerItem name="1000MHz" value="1000000"/>
+             <spinnerItem name="800MHz" value="800000"/>
+             <spinnerItem name="600MHz" value="600000"/>
+             <spinnerItem name="500MHz" value="500000"/>
+			 <spinnerItem name="400MHz" value="400000"/>
+             <spinnerItem name="200MHz" value="200000"/>
+      </spinner>
+      <seekBar description="If set to anything else than zero, ignores the flexrate request rate and uses this one instead. Ignores values under 10000. Default: 0µS."
+               name="Flexrate force-rate" 
+               action="cpu-governor flexrate_forcerate"
+               unit="µS" min="0" reversed="false" step="500" max="30000"/>
     </settingsPane>
 	<settingsPane description="Additionally to the frequency and runqueue depth, we consider the average frequency load on all cores and conditionally consider that on top of the other conditions. This enables more aggressive and true-to real load scaling." 
                   name="CPU core count load biasing">
       <seekBar description="Core count beyond which we bias the online count through the global load. Default: 2 core(s)."
                name="CPU online load bias count" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/cpu_online_bias_count"
+               action="cpu-governor cpu_online_bias_count"
                unit="core(s)" min="1" reversed="false" step="1" max="4"/>
       <seekBar description="Global average load up threshold of the last up rate sample count period, if current core count correponds or exceeds the core bias count, to enable hotplug-in of further cores, if frequency and runqueue depth conditions are also met. Default: 65%."
                name="CPU online bias up threshold" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/cpu_online_bias_up_threshold"
+               action="cpu-governor cpu_online_bias_up_threshold"
                unit="%" min="1" reversed="false" step="1" max="100"/>
       <seekBar description="Global average load down threshold of the last up rate sample count period, if current core count exceeds the core bias count, to enable hotplug-out of core(s), regardless of the primary conditions. Default: 30%."
                name="CPU online bias down threshold" 
-               action="generic /sys/devices/system/cpu/cpufreq/pegasusq/cpu_online_bias_down_threshold"
+               action="cpu-governor cpu_online_bias_down_threshold"
                unit="%" min="1" reversed="false" step="1" max="100"/>
     </settingsPane>
   </settingsTab>
