@@ -118,7 +118,7 @@ IO_TWEAKS()
 
 		echo "45" > /proc/sys/fs/lease-break-time;
 
-		log -p 10  i -t $FILE_NAME "*** IO_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** IO_TWEAKS ***: enabled";
 	fi;
 }
 IO_TWEAKS;
@@ -132,7 +132,7 @@ KERNEL_TWEAKS()
 		echo "1" > /proc/sys/vm/oom_kill_allocating_task;
 		sysctl -w vm.panic_on_oom=0;
 	
-		log -p 10  i -t $FILE_NAME "*** KERNEL_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** KERNEL_TWEAKS ***: enabled";
 	fi;
 }
 KERNEL_TWEAKS;
@@ -209,7 +209,7 @@ SYSTEM_TWEAKS()
   echo "200" > /proc/sys/vm/dirty_expire_centisecs
   echo "60" > /proc/sys/vm/swappiness
 
-		log -p 10  i -t $FILE_NAME "*** SYSTEM_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** SYSTEM_TWEAKS ***: enabled";
 	fi;
 }
 SYSTEM_TWEAKS;
@@ -240,7 +240,7 @@ BATTERY_TWEAKS()
 			done;
 		done;
 
-		log -p 10  i -t $FILE_NAME "*** BATTERY_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** BATTERY_TWEAKS ***: enabled";
 	fi;
 }
 
@@ -269,7 +269,7 @@ CPU_GOV_TWEAKS()
   echo "10" > /sys/devices/system/cpu/cpufreq/pegasusq/cpu_down_rate
   echo "$lcdfreq_enable" > /sys/devices/system/cpu/cpufreq/peqasusq/lcdfreq_enable
 
-		log -p 10  i -t $FILE_NAME "*** CPU_GOV_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** CPU_GOV_TWEAKS ***: enabled";
 	fi;
 }
 
@@ -290,7 +290,7 @@ MEMORY_TWEAKS()
 		echo "3" > /proc/sys/vm/page-cluster; # default: 3
 		echo "8192" > /proc/sys/vm/min_free_kbytes;
 
-		log -p 10  i -t $FILE_NAME "*** MEMORY_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** MEMORY_TWEAKS ***: enabled";
 	fi;
 }
 MEMORY_TWEAKS;
@@ -322,7 +322,7 @@ TCP_TWEAKS()
 		echo "4096" > /proc/sys/net/ipv4/udp_rmem_min;
 		echo "4096" > /proc/sys/net/ipv4/udp_wmem_min;
 
-		log -p 10  i -t $FILE_NAME "*** TCP_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** TCP_TWEAKS ***: enabled";
 	fi;
 }
 TCP_TWEAKS;
@@ -347,7 +347,7 @@ FIREWALL_TWEAKS()
 		#echo "0" > /proc/sys/net/ipv4/conf/all/accept_source_route;
 		#echo "0" > /proc/sys/net/ipv4/conf/default/accept_source_route;
 
-		log -p 10  i -t $FILE_NAME "*** FIREWALL_TWEAKS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** FIREWALL_TWEAKS ***: enabled";
 	fi;
 }
 FIREWALL_TWEAKS;
@@ -379,7 +379,7 @@ ENABLE_LOGGER()
 	if [ "$android_logger" == auto ] || [ "$android_logger" == debug ]; then
 		if [ -e /dev/log-sleep ] && [ ! -e /dev/log ]; then
 			mv /dev/log-sleep/ /dev/log/
-			log -p 10  i -t $FILE_NAME "*** LOGGER ***: enabled";
+			log -p 10 i -t $FILE_NAME "*** LOGGER ***: enabled";
 		fi;
 	fi;
 }
@@ -389,7 +389,7 @@ DISABLE_LOGGER()
 	if [ "$android_logger" == auto ] || [ "$android_logger" == disabled ]; then
 		if [ -e /dev/log ]; then
 			mv /dev/log/ /dev/log-sleep/;
-			log -p 10  i -t $FILE_NAME "*** LOGGER ***: disabled";
+			log -p 10 i -t $FILE_NAME "*** LOGGER ***: disabled";
 		fi;
 	fi;
 }
@@ -401,7 +401,7 @@ ENABLE_GESTURES()
 		pkill -f "/data/gesture_set.sh";
 		pkill -f "/sys/devices/virtual/misc/touch_gestures/wait_for_gesture";
 		nohup /sbin/busybox sh /data/gesture_set.sh;
-		log -p 10  i -t $FILE_NAME "*** GESTURE ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** GESTURE ***: enabled";
 	fi;
 }
 
@@ -412,7 +412,7 @@ DISABLE_GESTURES()
 		pkill -f "/sys/devices/virtual/misc/touch_gestures/wait_for_gesture";
 	fi;
 	echo "0" > /sys/devices/virtual/misc/touch_gestures/gestures_enabled;
-	log -p 10  i -t $FILE_NAME "*** GESTURE ***: disabled";
+	log -p 10 i -t $FILE_NAME "*** GESTURE ***: disabled";
 }
 
 
@@ -423,14 +423,25 @@ DONT_KILL_CORTEX()
 	for i in $PIDOFCORTEX; do
 		echo "-950" > /proc/${i}/oom_score_adj;
 	done;
-	log -p 10  i -t $FILE_NAME "*** DONT_KILL_CORTEX ***";
+	log -p 10 i -t $FILE_NAME "*** DONT_KILL_CORTEX ***";
+}
+
+MOUNT_SD_CARD()
+{
+        if [ "$auto_mount_sd" == on ]; then
+echo "/dev/block/vold/179:48" > /sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file;
+if [ -e /dev/block/vold/179:49 ]; then
+echo "/dev/block/vold/179:49" > /sys/devices/virtual/android_usb/android0/f_mass_storage/lun1/file;
+fi;
+log -p 10 i -t $FILE_NAME "*** MOUNT_SD_CARD ***";
+fi;
 }
 
 # set wakeup booster delay to prevent mp3 music shattering when screen turned ON
 WAKEUP_DELAY()
 {
 if [ "$wakeup_delay" != 0 ] && [ ! -e /data/.siyah/booting ]; then
-log -p 10  i -t $FILE_NAME "*** WAKEUP_DELAY ${wakeup_delay}sec ***";
+log -p 10 i -t $FILE_NAME "*** WAKEUP_DELAY ${wakeup_delay}sec ***";
 sleep $wakeup_delay
 fi;
 }
@@ -438,10 +449,10 @@ fi;
 WAKEUP_DELAY_SLEEP()
 {
 if [ "$wakeup_delay" != 0 ] && [ ! -e /data/.siyah/booting ]; then
-log -p 10  i -t $FILE_NAME "*** WAKEUP_DELAY_SLEEP ${wakeup_delay}sec ***";
+log -p 10 i -t $FILE_NAME "*** WAKEUP_DELAY_SLEEP ${wakeup_delay}sec ***";
 sleep $wakeup_delay;
 else
-log -p 10  i -t $FILE_NAME "*** WAKEUP_DELAY_SLEEP 3sec ***";
+log -p 10 i -t $FILE_NAME "*** WAKEUP_DELAY_SLEEP 3sec ***";
 sleep 3;
 fi;
 }
@@ -450,7 +461,7 @@ fi;
 WAKEUP_BOOST_DELAY()
 {
 if [ ! -e /data/.siyah/booting ] && [ "$wakeup_boost" != 0 ]; then
-log -p 10  i -t $FILE_NAME "*** WAKEUP_BOOST_DELAY ${wakeup_boost}sec ***";
+log -p 10 i -t $FILE_NAME "*** WAKEUP_BOOST_DELAY ${wakeup_boost}sec ***";
 sleep $wakeup_boost;
 fi;
 }
@@ -464,7 +475,7 @@ echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
 echo "266" > /sys/devices/system/gpu/min_freq;
 
-log -p 10  i -t $FILE_NAME "*** MEGA_BOOST_CPU_TWEAKS ***";
+log -p 10 i -t $FILE_NAME "*** MEGA_BOOST_CPU_TWEAKS ***";
 fi;
 }
 
@@ -480,7 +491,7 @@ AUTO_BRIGHTNESS()
 		if [ "$NEW_BRIGHTNESS" -le "$OLD_BRIGHTNESS" ]; then
 			echo "$NEW_BRIGHTNESS" > /sys/class/backlight/panel/brightness;
 		fi;
-		log -p 10  i -t $FILE_NAME "*** AUTO_BRIGHTNESS ***";
+		log -p 10 i -t $FILE_NAME "*** AUTO_BRIGHTNESS ***";
 	fi;
 }
 
@@ -491,10 +502,10 @@ SWAPPINESS()
 	SWAP_CHECK=`free | grep Swap | awk '{ print $2 }'`;
 	if [ "$zram" == 0 ] || [ "$SWAP_CHECK" == 0 ]; then
 		echo "0" > /proc/sys/vm/swappiness;
-		log -p 10  i -t $FILE_NAME "*** SWAPPINESS ***: disabled";
+		log -p 10 i -t $FILE_NAME "*** SWAPPINESS ***: disabled";
 	else
 		echo "60" > /proc/sys/vm/swappiness;
-		log -p 10  i -t $FILE_NAME "*** SWAPPINESS ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** SWAPPINESS ***: enabled";
 	fi;
 }
 
@@ -504,11 +515,11 @@ TUNE_IPV6()
 	if [ "$cortexbrain_ipv6" == on ] || [ "$CISCO_VPN" != 0 ]; then
 		echo "0" > /proc/sys/net/ipv6/conf/wlan0/disable_ipv6;
 		sysctl -w net.ipv6.conf.all.disable_ipv6=0
-		log -p 10  i -t $FILE_NAME "*** TUNE_IPV6 ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** TUNE_IPV6 ***: enabled";
 	else
 		echo "1" > /proc/sys/net/ipv6/conf/wlan0/disable_ipv6;
 		sysctl -w net.ipv6.conf.all.disable_ipv6=1
-		log -p 10  i -t $FILE_NAME "*** TUNE_IPV6 ***: disabled";
+		log -p 10 i -t $FILE_NAME "*** TUNE_IPV6 ***: disabled";
 	fi;
 }
 
@@ -532,7 +543,7 @@ KERNEL_SCHED_AWAKE()
     ;;
 esac;
 
-	log -p 10  i -t $FILE_NAME "*** KERNEL_SCHED ***: awake";
+	log -p 10 i -t $FILE_NAME "*** KERNEL_SCHED ***: awake";
 }
 
 KERNEL_SCHED_SLEEP()
@@ -540,7 +551,7 @@ KERNEL_SCHED_SLEEP()
 	echo "20000000" > /proc/sys/kernel/sched_latency_ns;
 	echo "3000000" > /proc/sys/kernel/sched_wakeup_granularity_ns;
 	echo "2500000" > /proc/sys/kernel/sched_min_granularity_ns;
-	log -p 10  i -t $FILE_NAME "*** KERNEL_SCHED ***: sleep";
+	log -p 10 i -t $FILE_NAME "*** KERNEL_SCHED ***: sleep";
 }
 
 # if crond used, then give it root perent - if started by STweaks, then it will be killed in time
@@ -549,7 +560,7 @@ CROND_SAFETY()
 	if [ "$crontab" == on ]; then
 		pkill -f "crond";
 		/res/crontab_service/service.sh;
-		log -p 10  i -t $FILE_NAME "*** CROND_SAFETY ***";
+		log -p 10 i -t $FILE_NAME "*** CROND_SAFETY ***";
 	fi;
 }
 
@@ -557,7 +568,7 @@ DISABLE_NMI()
 {
 	if [ -e /proc/sys/kernel/nmi_watchdog ]; then
 		echo "0" > /proc/sys/kernel/nmi_watchdog;
-		log -p 10  i -t $FILE_NAME "*** NMI ***: disable";
+		log -p 10 i -t $FILE_NAME "*** NMI ***: disable";
 	fi;
 }
 
@@ -565,7 +576,7 @@ ENABLE_NMI()
 {
 	if [ -e /proc/sys/kernel/nmi_watchdog ]; then
 		echo "1" > /proc/sys/kernel/nmi_watchdog;
-		log -p 10  i -t $FILE_NAME "*** NMI ***: enabled";
+		log -p 10 i -t $FILE_NAME "*** NMI ***: enabled";
 	fi;
 }
 
@@ -585,6 +596,8 @@ AWAKE_MODE()
 #	cp -a /tmp/$scaling_governor/* /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor/$scaling_governor;
 	
 	MEGA_BOOST_CPU_TWEAKS;
+	
+	MOUNT_SD_CARD;
 	
 	ENABLE_GESTURES;
 	
@@ -625,7 +638,7 @@ AWAKE_MODE()
 
 	DONT_KILL_CORTEX;
 
-	log -p 10  i -t $FILE_NAME "*** AWAKE Normal Mode ***";
+	log -p 10 i -t $FILE_NAME "*** AWAKE Normal Mode ***";
 }
 
 # ==============================================================
@@ -686,10 +699,10 @@ fi;
 
 		DISABLE_NMI;
 
-		log -p 10  i -t $FILE_NAME "*** SLEEP mode ***";
+		log -p 10 i -t $FILE_NAME "*** SLEEP mode ***";
 
 		DISABLE_LOGGER;
-		log -p 10  i -t $FILE_NAME "*** SCREEN OFF BUT POWERED mode ***";
+		log -p 10 i -t $FILE_NAME "*** SCREEN OFF BUT POWERED mode ***";
 }
 
 # ==============================================================

@@ -132,3 +132,4 @@ hotplug_rq_4_0=300
 cpu_online_bias_count=2
 cpu_online_bias_up_threshold=65
 cpu_online_bias_down_threshold=30
+auto_mount_sd=on
