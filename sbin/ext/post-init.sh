@@ -95,7 +95,7 @@ rm -f /data/.siyah/booting;
 /res/customconfig/actions/usb-mode ${usb_mode};
 )&
 
-/sbin/busybox mount -t rootfs -o remount,ro rootfs
+/sbin/busybox mount -t rootfs -o remount,rw rootfs
 
 ##### EFS Backup #####
 (
