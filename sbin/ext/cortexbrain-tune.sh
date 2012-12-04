@@ -473,7 +473,7 @@ if [ "$cortexbrain_cpu" == on ]; then
 
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
-echo "266" > /sys/devices/system/gpu/min_freq;
+echo "$gpu_res_freq" > /sys/devices/system/gpu/min_freq;
 
 log -p 10 i -t $FILE_NAME "*** MEGA_BOOST_CPU_TWEAKS ***";
 fi;
