@@ -297,7 +297,7 @@
       </spinner>
       <checkbox description="If enabled this functions, GPU will be powered up to RESUME Freq."
                 name="GPU Resume FREQ"
-                action="generic_cortex /tmp/mali_resume_enable"
+                action="generic01 /tmp/mali_resume_enable"
                 label="Enable MALI Resume Freq"/>
 	        <spinner description="Changes the GPU RESUME frequency" name="GPU RESUME Frequency" action="generic /tmp/gpu_res_freq">
 	         <spinnerItem name="440MHz" value="440"/> 

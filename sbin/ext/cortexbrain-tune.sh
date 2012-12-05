@@ -473,7 +473,7 @@ if [ "$cortexbrain_cpu" == on ]; then
 
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
 echo "1400000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
-if [ "$mali_resume_enable" == on ]; then
+if [ "$mali_resume_enable" != 0 ]; then
 echo "$gpu_res_freq" > /sys/devices/system/gpu/min_freq;
 fi;
 log -p 10 i -t $FILE_NAME "*** MEGA_BOOST_CPU_TWEAKS ***";
@@ -611,7 +611,7 @@ AWAKE_MODE()
 	# set I/O-Scheduler
 	echo "$scheduler" > /sys/block/mmcblk0/queue/scheduler;
 	echo "$scheduler" > /sys/block/mmcblk1/queue/scheduler;
-if [ "$mali_resume_enable" == on ]; then
+if [ "$mali_resume_enable" != 0 ]; then
 	echo "$GPUFREQ1" > /sys/devices/system/gpu/min_freq;
 fi;
 	echo "50" > /proc/sys/vm/vfs_cache_pressure;
