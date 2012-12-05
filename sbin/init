@@ -97,10 +97,8 @@ else
   mount -t ext4 /dev/block/mmcblk0p9 /system
 fi
 
-# linking sbin to /bin for crond
-if [ ! -v /bin ]; then
-ln -s /sbin/ /bin;
-fi;
+# linking /system/bin to /bin for crond
+ln -s /system/bin/ /bin
 
 AOSP=0
 MIUI=0
