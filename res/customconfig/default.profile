@@ -134,3 +134,5 @@ cpu_online_bias_up_threshold=65
 cpu_online_bias_down_threshold=30
 auto_mount_sd=on
 gpu_res_freq=160
+mali_resume_enable=off
+

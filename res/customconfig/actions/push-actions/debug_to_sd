@@ -10,6 +10,7 @@ fi;
 
 DEBUG_FILE="/sdcard/halaszk_debug";
 DEBUG_FILE_LOGCAT="/sdcard/halaszk_debug_logcat";
+DEBUG_FILE_KMSG="/sdcard/halaszk_debug_kmsg";
 
 case "${debug_to_sd}" in
 	1)
@@ -147,6 +148,16 @@ case "${debug_to_sd}" in
 		)&
 		echo "Collecting logs for 60Sec please wait";
 	;;	
+3)
+                # last_kmsg
+                (
+                        echo "last_kmsg-Info:" >> $DEBUG_FILE_KMSG;
+                        cat /proc/last_kmsg >> $DEBUG_FILE_KMSG;
+                        SEPARATOR;
+                )&
+                echo "Collecting last kmsg done";
+        ;;
+
 	*)
 		echo "need input";
 	;;

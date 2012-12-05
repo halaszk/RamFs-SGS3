@@ -10,7 +10,7 @@ chmod 777 /data/.siyah
 ccxmlsum=`md5sum /res/customconfig/customconfig.xml | awk '{print $1}'`
 if [ "a${ccxmlsum}" != "a`cat /data/.siyah/.ccxmlsum`" ];
 then
-  rm -f /data/.siyah/*.profile
+#  rm -f /data/.siyah/*.profile
   echo ${ccxmlsum} > /data/.siyah/.ccxmlsum
 fi
 [ ! -f /data/.siyah/default.profile ] && cp /res/customconfig/default.profile /data/.siyah
@@ -106,7 +106,7 @@ rm -f /data/.siyah/booting;
 sleep 12
 /res/uci.sh apply
 
-	PIDOFACORE=`pgrep -f "android.process.acore"`;
+PIDOFACORE=`pgrep -f "android.process.acore"`;
 for i in $PIDOFACORE; do
 echo "-800" > /proc/${i}/oom_score_adj;
 renice -15 -p $i;
@@ -118,5 +118,5 @@ done;
 if [ $init_d == on ]; then
 /sbin/busybox sh /sbin/ext/run-init-scripts.sh;
 fi;
-/sbin/busybox sh /sbin/ext/partitions-tune.sh
+#/sbin/busybox sh /sbin/ext/partitions-tune.sh
 

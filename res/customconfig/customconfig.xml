@@ -295,6 +295,10 @@
              <spinnerItem name="440MHz" value="440"/> 
              <spinnerItem name="350MHz" value="350"/>  
       </spinner>
+      <checkbox description="If enabled this functions, GPU will be powered up to RESUME Freq."
+                name="GPU Resume FREQ"
+                action="generic_cortex /tmp/mali_resume_enable"
+                label="Enable MALI Resume Freq"/>
 	        <spinner description="Changes the GPU RESUME frequency" name="GPU RESUME Frequency" action="generic /tmp/gpu_res_freq">
 	         <spinnerItem name="440MHz" value="440"/> 
              <spinnerItem name="350MHz" value="350"/>
@@ -613,10 +617,11 @@ name="STweaks Reinstall/Update.">
 </settingsPane>
 </settingsTab>
 <settingsTab name="BUG-REPORT">
-<settingsPane description="Debug to SD-Card (/sdcard) ..."
+<settingsPane description="Debug to SD-Card (/sdcard) (DMESG, LOGCAT, LAST-KMSG..."
 name="Bug-Report">
 <button description="Bug-Report for Kernel" name="Kernel-Bug" action="push-actions/debug_to_sd 1" label="KERNEL-BUG"/>
 <button description="Bug-Report for Apps" name="App-Bug" action="push-actions/debug_to_sd 2" label="APP-BUG"/>
+<button description="Bug-Report for Kernel Messages" name="Last Kernel Messages" action="push-actions/debug_to_sd 3" label="LAST-KMSG"/>
 </settingsPane>
 
 </settingsTab>
