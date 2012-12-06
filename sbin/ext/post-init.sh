@@ -118,5 +118,5 @@ done;
 if [ $init_d == on ]; then
 /sbin/busybox sh /sbin/ext/run-init-scripts.sh;
 fi;
-#/sbin/busybox sh /sbin/ext/partitions-tune.sh
+/sbin/busybox sh /sbin/ext/partitions-tune.sh
 
